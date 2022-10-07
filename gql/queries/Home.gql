@@ -1,21 +1,48 @@
 #import "~/gql/fragments/MediaImage.gql"
-#import "~/gql/fragments/GutenbergBlocks.gql"
 
-# Query to get all the sub pages of the homepage
-query Home($uri: String!) {
-    nodeByUri(uri: $uri) {
+query Home {
+    nodeByUri(uri: "/featured/") {
         ... on Page {
-            title
             id
-            # workMeta {
-            #     videoUrl
-            # }
-            featuredImage {
-                node {
-                    ...MediaImage
+            title
+            children(first: 2) {
+                nodes {
+                    ... on Page {
+                        id
+                        title
+                        children(first: 99) {
+                            nodes {
+                                ... on Page {
+                                    id
+                                    title
+                                    secondaryFeaturedImage {
+                                        secondaryFeaturedImage {
+                                            ...MediaImage
+                                        }
+                                    }
+                                    featuredImage {
+                                        node {
+                                            ...MediaImage
+                                        }
+                                    }
+                                    workMeta {
+                                        type
+                                        publication
+                                        link
+                                        talentRelationship {
+                                            ... on Page {
+                                                title
+                                                id
+                                                uri
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            ...GutenbergBlocks
         }
     }
 }

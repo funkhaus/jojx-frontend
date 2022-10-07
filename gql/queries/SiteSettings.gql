@@ -20,6 +20,7 @@ query SiteSettings {
             socialSharedImage {
                 sourceUrl(size: SOCIAL_PREVIEW)
             }
+            # mailchimpUrl
         }
     }
 }

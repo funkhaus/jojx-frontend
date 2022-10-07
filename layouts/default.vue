@@ -5,25 +5,13 @@
 
         <global-hamburger />
 
-        <nuxt-link
-            to="/"
-            class="fuxt-logo"
-        >
-            <svg-logo-funkhaus class="svg" />
-        </nuxt-link>
-
-        <wp-menu name="Main Menu" />
+        <global-logo />
 
         <nuxt
             class="page"
             keep-alive
             :keep-alive-props="{ include: ['WpMenu', 'WpSeo'] }"
         />
-
-        <!-- WordPress editor controls shown on frontend when logged in -->
-        <client-only>
-            <wp-controls />
-        </client-only>
     </main>
 </template>
 
@@ -34,13 +22,7 @@ import _kebabCase from "lodash/kebabCase"
 import metaDefaults from "~/utils/metaDefaults"
 import titleTemplate from "~/utils/titleTemplate"
 
-// Components
-import SvgLogoFunkhaus from "~/assets/svg/logo-funkhaus"
-
 export default {
-    components: {
-        SvgLogoFunkhaus
-    },
     head() {
         return {
             htmlAttrs: {
@@ -131,14 +113,5 @@ export default {
 
 <style lang="scss">
 .layout-default {
-    .fuxt-logo {
-        position: absolute;
-        top: 20px;
-        left: 0;
-        right: 0;
-        margin: auto;
-        width: 200px;
-        text-align: center;
-    }
 }
 </style>

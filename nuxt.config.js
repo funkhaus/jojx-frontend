@@ -46,8 +46,8 @@ export default {
         "~/styles/global.scss",
         "~/styles/transitions.scss",
         "~/styles/variables-css.scss",
-        "~/styles/themes.scss"
-        //"~/styles/fonts.css" // Be sure to turn on the font loader plugin and config it
+        "~/styles/themes.scss",
+        "~/styles/fonts.css" // Be sure to turn on the font loader plugin and config it
     ],
 
     /*
@@ -65,8 +65,8 @@ export default {
         { src: "~/plugins/global-directive-loader.js" },
         { src: "~/plugins/google-gtag.client.js", mode: "client" },
         { src: "~/plugins/preview.client.js", mode: "client" },
-        { src: "~/plugins/performant-events.client.js", mode: "client" }
-        //{ src: "~/plugins/web-font-loader.client.js", mode: "client" },
+        { src: "~/plugins/performant-events.client.js", mode: "client" },
+        { src: "~/plugins/web-font-loader.client.js", mode: "client" }
         //{ src: "~/plugins/ip-geolocate.js" },
     ],
 
@@ -207,8 +207,8 @@ export default {
      */
     generate: {
         fallback: "404.html",
-        interval: 500,
-        concurrency: 100
+        interval: 100,
+        concurrency: 10
     },
 
     /*

@@ -1,8 +1,11 @@
 <template>
     <section class="page-home">
-        <wp-image class="image" :image="parsedPage.featuredImage" />
+        <wp-image
+            class="image"
+            :image="parsedPage.featuredImage"
+        />
 
-        <wp-gutenberg id="content" :blocks="parsedPage.blocks" />
+        <!-- <wp-gutenberg id="content" :blocks="parsedPage.blocks" /> -->
     </section>
 </template>
 
@@ -16,10 +19,10 @@ import HOME from "~/gql/queries/Home"
 export default {
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(HOME, {
-            uri: route.path,
+            uri: route.path
         })
         return {
-            page: _get(data, "nodeByUri", {}),
+            page: _get(data, "nodeByUri", {})
         }
     },
     computed: {
@@ -27,10 +30,10 @@ export default {
             // Shape data from WP-GQL to work with template
             return {
                 ...this.page,
-                featuredImage: _get(this, "page.featuredImage.node", {}),
+                featuredImage: _get(this, "page.featuredImage.node", {})
             }
-        },
-    },
+        }
+    }
 }
 </script>
 

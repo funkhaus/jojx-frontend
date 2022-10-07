@@ -7,20 +7,25 @@
 :root {
     --color-white: #ffffff;
     --color-black: #000000;
+    --color-gray: #cbcbcb;
 
     --unit-100vh: 100vh;
-    /* --unit-gap: 40px; */
+    --unit-gap: 40px;
     --unit-max-width: 1800px;
 
-    --font-primary: sans-serif;
-    --font-secondary: serif;
+    --font-primary: "Plantin MT Pro", serif;
 
     --easing-authentic-motion: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Breakpoints */
+@media #{$gt-cinema} {
+    :root {
+    }
+}
+
 @media #{$lt-phone} {
     :root {
-        /* --unit-gap: 20px; */
+        --unit-gap: 20px;
     }
 }
