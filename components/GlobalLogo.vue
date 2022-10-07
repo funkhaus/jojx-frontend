@@ -32,6 +32,7 @@ export default {
 <style lang="scss" scoped>
 .global-logo {
     position: fixed;
+    z-index: 900;
     bottom: var(--unit-gap);
     left: var(--unit-gap);
     mix-blend-mode: difference;

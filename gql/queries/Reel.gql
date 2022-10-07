@@ -1,0 +1,58 @@
+#import "~/gql/fragments/MediaImage.gql"
+
+query Reel($uri: String!) {
+    nodeByUri(uri: $uri) {
+        ... on Page {
+            id
+            title
+            encodedContent
+            featuredImage {
+                node {
+                    ...MediaImage
+                }
+            }
+            secondaryFeaturedImage {
+                secondaryFeaturedImage {
+                    ...MediaImage
+                }
+            }
+            children(first: 99) {
+                nodes {
+                    ... on Page {
+                        id
+                        title
+                        to: uri
+                        secondaryFeaturedImage {
+                            secondaryFeaturedImage {
+                                ...MediaImage
+                            }
+                        }
+                        tags {
+                            nodes {
+                                id
+                                name
+                            }
+                        }
+                        featuredImage {
+                            node {
+                                ...MediaImage
+                            }
+                        }
+                        workMeta {
+                            type
+                            publication
+                            link
+                            talentRelationship {
+                                ... on Page {
+                                    title
+                                    id
+                                    uri
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+#import "~/gql/fragments/MediaImage.gql"
+
+query Info {
+    nodeByUri(uri: "/info/") {
+        ... on Page {
+            id
+            title
+            encodedContent
+            featuredImage {
+                node {
+                    ...MediaImage
+                }
+            }
+            contactMeta {
+                address
+                addressLink
+                telephone
+                team {
+                    name
+                    position
+                    email
+                }
+                representation {
+                    location
+                    company
+                    rep {
+                        name
+                        email
+                        telephone
+                    }
+                }
+            }
+        }
+    }
+}

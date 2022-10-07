@@ -1,19 +1,16 @@
 <template>
-    <section class="page-default">
-        <wp-gutenberg
-            id="content"
-            :blocks="parsedPage.blocks"
-        />
+    <section class="page-detail">
+        {{ page.title }}
     </section>
 </template>
 
 <script>
 // Queries
-import HOME from "~/gql/queries/Home"
+import DETAIL from "~/gql/queries/Detail"
 
 export default {
     async asyncData({ $graphql, route }) {
-        const data = await $graphql.default.request(HOME, {
+        const data = await $graphql.default.request(DETAIL, {
             uri: route.path
         })
         return {
@@ -32,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-default {
+.page-detail {
     color: var(--color-black);
     margin: 0 auto;
     min-height: var(--unit-100vh);

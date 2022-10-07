@@ -70,10 +70,16 @@ export default {
             ]
         },
         themeName() {
-            let output = "default"
+            let output = "white"
             switch (this.$route.name) {
                 case "index":
-                    output = "default"
+                    output = "white"
+                    break
+                case "directors":
+                case "directors-director-detail":
+                case "studio":
+                case "studio-studio-detail":
+                    output = "black"
                     break
             }
             return output

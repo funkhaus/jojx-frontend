@@ -15,6 +15,13 @@ query Home {
                                 ... on Page {
                                     id
                                     title
+                                    to: uri
+                                    tags {
+                                        nodes {
+                                            id
+                                            name
+                                        }
+                                    }
                                     secondaryFeaturedImage {
                                         secondaryFeaturedImage {
                                             ...MediaImage

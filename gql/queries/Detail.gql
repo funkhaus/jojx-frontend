@@ -1,0 +1,35 @@
+#import "~/gql/fragments/MediaImage.gql"
+#import "~/gql/fragments/GutenbergBlocks"
+
+query Detail($uri: String!) {
+    nodeByUri(uri: $uri) {
+        ... on Page {
+            id
+            title
+            to: uri
+            ...GutenbergBlocks
+            secondaryFeaturedImage {
+                secondaryFeaturedImage {
+                    ...MediaImage
+                }
+            }
+            featuredImage {
+                node {
+                    ...MediaImage
+                }
+            }
+            workMeta {
+                type
+                publication
+                link
+                talentRelationship {
+                    ... on Page {
+                        title
+                        id
+                        uri
+                    }
+                }
+            }
+        }
+    }
+}

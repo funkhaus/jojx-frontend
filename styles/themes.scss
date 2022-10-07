@@ -2,5 +2,16 @@
  * This file is useful for styling site wide themes. Like background colors etc.
  * The theme names are set in the default layout bodyClasses() and themeName() computeds.
  */
-.theme-default {
+:root,
+.theme-black {
+    --theme-color-background: var(--color-black);
+    --theme-color-text: var(--color-white);
+}
+.theme-white {
+    --theme-color-background: var(--color-white);
+    --theme-color-text: var(--color-black);
+}
+.theme-gray {
+    --theme-color-background: var(--color-gray);
+    --theme-color-text: var(--color-black);
 }

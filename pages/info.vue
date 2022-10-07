@@ -1,19 +1,19 @@
 <template>
-    <section class="page-default">
-        <wp-gutenberg
-            id="content"
-            :blocks="parsedPage.blocks"
+    <section class="page-home">
+        <wp-image
+            class="image"
+            :image="parsedPage.featuredImage"
         />
     </section>
 </template>
 
 <script>
 // Queries
-import HOME from "~/gql/queries/Home"
+import INFO from "~/gql/queries/Info"
 
 export default {
     async asyncData({ $graphql, route }) {
-        const data = await $graphql.default.request(HOME, {
+        const data = await $graphql.default.request(INFO, {
             uri: route.path
         })
         return {
@@ -24,7 +24,8 @@ export default {
         parsedPage() {
             // Shape data from WP-GQL to work with template
             return {
-                ...this.page
+                ...this.page,
+                featuredImage: this?.page?.featuredImage?.node || {}
             }
         }
     }
@@ -32,7 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-default {
+.page-home {
     color: var(--color-black);
     margin: 0 auto;
     min-height: var(--unit-100vh);
@@ -47,8 +48,9 @@ export default {
         // Hover styles would go here
     }
 
-    /* Breakpoints */
+    // Breakpoints
     @media #{$lt-phone} {
+        // Phone styles would go here
     }
 }
 </style>

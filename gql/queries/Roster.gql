@@ -1,24 +1,16 @@
 #import "~/gql/fragments/MediaImage.gql"
-#import "~/gql/fragments/GutenbergBlocks.gql"
 
-query NewsDetail($uri: String!) {
+query Roster($uri: String!) {
     nodeByUri(uri: $uri) {
-        id
-        ... on Post {
+        ... on Page {
+            id
             title
-            excerpt
-            featuredImage {
-                node {
-                    ...MediaImage
-                }
-            }
-            ...GutenbergBlocks
-            previousPost {
-                node {
-                    ... on Post {
+            children(first: 99) {
+                nodes {
+                    ... on Page {
                         id
                         title
-                        uri
+                        to: uri
                         featuredImage {
                             node {
                                 ...MediaImage

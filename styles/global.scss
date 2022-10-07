@@ -7,8 +7,8 @@
 body {
     font-family: var(--font-primary);
     font-size: 16px;
-    color: var(--color-black);
-    background-color: var(--color-white);
+    color: var(--theme-color-text);
+    background-color: var(--theme-color-background);
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -73,6 +73,15 @@ button {
 }
 .global-hamburger {
     z-index: 400;
+}
+
+// Structure
+.page {
+    position: relative;
+    z-index: 20;
+    min-height: var(--unit-100vh);
+    background-color: var(--theme-color-background);
+    transition: background-color 0.8s var(--easing-authentic-motion);
 }
 
 // Gutenberg overrides

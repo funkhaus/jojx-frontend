@@ -10,9 +10,6 @@
 </template>
 
 <script>
-// Helpers
-import _get from "lodash/get"
-
 // Queries
 import HOME from "~/gql/queries/Home"
 
@@ -22,7 +19,7 @@ export default {
             uri: route.path
         })
         return {
-            page: _get(data, "nodeByUri", {})
+            page: data?.nodeByUri || {}
         }
     },
     computed: {
@@ -30,7 +27,7 @@ export default {
             // Shape data from WP-GQL to work with template
             return {
                 ...this.page,
-                featuredImage: _get(this, "page.featuredImage.node", {})
+                featuredImage: this?.page?.featuredImage?.node || {}
             }
         }
     }
