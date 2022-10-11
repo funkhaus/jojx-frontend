@@ -36,10 +36,16 @@ export default {
     bottom: var(--unit-gap);
     left: var(--unit-gap);
     mix-blend-mode: difference;
+    transform-origin: bottom left;
 
     transform: scale(0.2); // 145 / 716 = .2
-    transform-origin: bottom left;
-    transition: transform 0.4s var(--easing-authentic-motion);
+    transition: all 0.6s var(--easing-authentic-motion);
+    .route-index & {
+        transform: translate(0, calc(-50vh + 100%));
+    }
+    .route-index .is-scrolled & {
+        transform: scale(0.2); // 145 / 716 = .2
+    }
 
     .svg path {
         fill: var(--color-white);

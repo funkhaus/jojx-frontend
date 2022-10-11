@@ -73,7 +73,8 @@ export default {
             let output = "white"
             switch (this.$route.name) {
                 case "index":
-                    output = "white"
+                    // output = "white"
+                    output = this.$store.state.theme || "white"
                     break
                 case "directors":
                 case "directors-director-detail":

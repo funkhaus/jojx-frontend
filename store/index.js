@@ -10,7 +10,7 @@ export const state = () => ({
     winHeight: 0,
     winWidth: 0,
     referrer: false,
-    scrollDirection: "up"
+    theme: ""
 })
 
 // Define mutations
@@ -36,6 +36,9 @@ export const mutations = {
     },
     SET_SCROLL_DIRECTION(state, direction) {
         state.scrollDirection = direction
+    },
+    SET_THEME(state, data) {
+        state.theme = data
     }
 }
 
@@ -63,8 +66,8 @@ export const actions = {
 
         // Get site settings from WordPress and save them to store
         try {
-            // const data = await this.$graphql.default.request(SITE_SETTINGS)
-            const data = {}
+            const data = await this.$graphql.default.request(SITE_SETTINGS)
+
             const options = _get(data, "acfSettings.siteOptions", {})
 
             // Get and shape general settings

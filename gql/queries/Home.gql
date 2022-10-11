@@ -5,11 +5,17 @@ query Home {
         ... on Page {
             id
             title
+            featuredImage {
+                node {
+                    ...MediaImage
+                }
+            }
             children(first: 2) {
                 nodes {
                     ... on Page {
                         id
                         title
+                        text: encodedContent
                         children(first: 99) {
                             nodes {
                                 ... on Page {
