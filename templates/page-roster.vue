@@ -1,17 +1,6 @@
 <template>
     <section class="page-roster">
-        <ul class="items">
-            <li
-                v-for="item in items"
-                :key="item.title"
-                class="item"
-            >
-                <a
-                    :href="item.to"
-                    v-html="item.title"
-                />
-            </li>
-        </ul>
+        <list-roster :items="parsedItems" />
     </section>
 </template>
 
@@ -52,17 +41,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    .items {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        text-align: center;
-    }
-
-    .item {
-        color: var(--color-white);
-    }
 
     // Hover states
     @media #{$has-hover} {

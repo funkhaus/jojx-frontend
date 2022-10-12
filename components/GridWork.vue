@@ -35,6 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .grid-work {
+    height: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -45,6 +46,9 @@ export default {
 
     // Breakpoints
     @media #{$lt-phone} {
+        .item {
+            width: 100%;
+        }
     }
 }
 </style>

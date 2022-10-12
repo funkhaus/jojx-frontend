@@ -127,6 +127,10 @@ export default {
         width: auto;
     }
 
+    .panel-bottom {
+        height: 100%;
+    }
+
     // Hover states
     @media #{$has-hover} {
         // Hover styles would go here

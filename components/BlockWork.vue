@@ -51,6 +51,10 @@ export default {
             type: Object,
             default: () => {}
         },
+        imageSecondary: {
+            type: Object,
+            default: () => {}
+        },
         title: {
             type: String,
             default: ""
@@ -83,7 +87,7 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     box-sizing: border-box;
-    padding: 20px;
+    // padding: 20px;
 
     .panel-text {
         max-width: 515px;

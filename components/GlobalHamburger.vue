@@ -1,7 +1,7 @@
 <template>
     <div
         :class="classes"
-        @click="toggleMenu()"
+        @click="onClick()"
     >
         <div class="line line-1" />
         <div class="line line-2" />
@@ -22,9 +22,9 @@ export default {
         }
     },
     methods: {
-        toggleMenu() {
+        onClick() {
             // Toggle menu state
-            this.$emit("menu-opened", !this.isOpen)
+            this.$emit("interacted", !this.isOpen)
         }
     }
 }
@@ -39,11 +39,15 @@ export default {
     position: fixed;
     top: 0;
     right: 0;
+    z-index: 900;
+    mix-blend-mode: difference;
+    cursor: pointer;
 
     .line {
         height: 2px;
         width: 20px;
-        background-color: var(--color-black);
+        background-color: var(--theme-color-nav);
+
         &:first-of-type {
             margin: 0 0 6px 0;
         }

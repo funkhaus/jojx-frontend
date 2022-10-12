@@ -4,7 +4,7 @@ import _get from "lodash/get"
 // Define State defaults
 export const state = () => ({
     siteMeta: {},
-    menuOpened: false,
+    menuIsOpen: false,
     breakpoint: "desktop",
     sTop: 0,
     winHeight: 0,
@@ -19,7 +19,7 @@ export const mutations = {
         state.breakpoint = breakpoint
     },
     SET_MENU(state, data) {
-        state.menuOpened = data
+        state.menuIsOpen = data
     },
     SET_S_TOP(state, pos) {
         state.sTop = pos

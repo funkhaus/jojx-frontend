@@ -3,15 +3,43 @@
         <!-- This helps with SEO -->
         <wp-seo />
 
-        <global-hamburger />
+        <global-hamburger
+            :is-open="$store.state.menuIsOpen"
+            @interacted="toggleMenu"
+        />
 
-        <global-logo />
+        <panel-menu
+            :is-open="$store.state.menuIsOpen"
+            @interacted="toggleMenu"
+        />
+
+        <global-logo v-if="showLogo" />
+
+        <global-nav
+            class="nav directors"
+            :to="'/directors/'"
+            text="directors"
+        />
+
+        <global-nav
+            class="nav studio"
+            :to="'/studio/'"
+            text="studio"
+        />
+
+        <global-nav
+            class="nav info"
+            :to="'/info/'"
+            text="info"
+        />
 
         <nuxt
             class="page"
             keep-alive
             :keep-alive-props="{ include: ['WpMenu', 'WpSeo'] }"
         />
+
+        <global-footer v-if="showFooter" />
     </main>
 </template>
 
@@ -85,6 +113,27 @@ export default {
             }
             return output
         },
+        showLogo() {
+            let show = true
+            switch (this.$route.name) {
+                case "directors":
+                case "studio":
+                    show = false
+                    break
+            }
+            return show
+        },
+        showFooter() {
+            let show = true
+            switch (this.$route.name) {
+                case "directors":
+                case "studio":
+                case "info":
+                    show = false
+                    break
+            }
+            return show
+        },
         breakpoint() {
             const winWidth = this.$store.state.winWidth
             let breakpoint = "desktop"
@@ -114,11 +163,33 @@ export default {
                 }
             }
         }
+    },
+    methods: {
+        toggleMenu(bool) {
+            this.$store.commit("SET_MENU", bool)
+        }
     }
 }
 </script>
 
 <style lang="scss">
 .layout-default {
+    .nav.directors {
+        top: 0;
+        left: var(--unit-gap);
+        transform: rotate(90deg) translate(20%, 0%);
+    }
+    .nav.studio {
+        top: var(--unit-gap);
+        right: var(--unit-gap);
+        transform: rotate(90deg) translate(0%, -150%);
+        transform-origin: center;
+    }
+    .nav.info {
+        bottom: var(--unit-gap);
+        right: var(--unit-gap);
+        transform: rotate(90deg) translate(50%, -50%);
+        transform-origin: right;
+    }
 }
 </style>

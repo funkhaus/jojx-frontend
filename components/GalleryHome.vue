@@ -1,7 +1,5 @@
 <template>
     <div :class="classes">
-        <!-- foo -->
-
         <div
             v-for="item in items"
             :key="item.id"
