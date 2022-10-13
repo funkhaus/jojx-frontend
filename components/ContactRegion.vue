@@ -4,33 +4,33 @@
             class="title"
             v-html="title"
         />
-        <div class="meta">
-            <div class="info-meta">
-                <a
+        <div class="panel-content">
+            <div class="panel-info">
+                <effect-text-hover
                     target="_blank"
                     class="address"
-                    :href="mapUrl"
-                    v-html="address"
+                    :to="mapUrl"
+                    :text="address"
                 />
-                <a
+                <effect-text-hover
                     class="email"
-                    :href="`mailto:${email}`"
-                >
-                    Email front desk
-                </a>
-                <a
+                    :to="`mailto:${email}`"
+                    text="Email front desk"
+                />
+
+                <effect-text-hover
                     class="phone"
-                    :href="`tel:${phone}`"
-                    v-html="phone"
+                    :to="`tel:${phone}`"
+                    :text="phone"
                 />
                 <div class="social-links">
-                    <a
+                    <effect-text-hover
                         v-for="link in socialLinks"
                         :key="link.title"
                         class="social-link"
-                        :href="link.to"
+                        :to="link.to"
                         target="_blank"
-                        v-html="link.title"
+                        :text="link.title"
                     />
                 </div>
             </div>
@@ -42,7 +42,9 @@
     </div>
 </template>
 <script>
+import EffectTextHover from "./EffectTextHover.vue"
 export default {
+    components: { EffectTextHover },
     props: {
         title: {
             type: String,
@@ -96,13 +98,13 @@ export default {
             margin: 0;
         }
     }
-    .meta {
+    .panel-content {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
     }
-    .info-meta {
+    .panel-info {
         margin-right: 45px;
 
         max-width: 215px;
@@ -160,10 +162,10 @@ export default {
             padding: 0 20px;
             font-size: 34px;
         }
-        .meta {
+        .panel-content {
             display: block;
         }
-        .info-meta {
+        .panel-info {
             max-width: 180px;
 
             margin-right: 0;

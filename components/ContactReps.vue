@@ -82,12 +82,9 @@ export default {
             flex-direction: column;
         }
         .rep {
-            margin: 40px 0;
+            margin: 0 0 40px 0;
             &:first-child {
-                margin: 20px 0 40px;
-            }
-            &:last-child {
-                margin: 20px 0 60px;
+                margin-top: 20px;
             }
         }
     }

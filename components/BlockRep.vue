@@ -1,15 +1,15 @@
 <template lang="html">
     <div class="block-rep">
-        <a
-            :href="`mailto:${email}`"
+        <effect-text-hover
+            :to="`mailto:${email}`"
             class="name"
-            v-html="name"
+            :text="name"
         />
-        <a
+        <effect-text-hover
             v-if="telephone"
             class="telephone"
-            :href="`tel:${telephone}`"
-            v-html="telephone"
+            :to="`tel:${telephone}`"
+            :text="telephone"
         />
         <div
             v-if="position"
