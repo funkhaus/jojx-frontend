@@ -42,6 +42,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .block-rep {
+    width: 50%;
     a {
         display: block;
     }

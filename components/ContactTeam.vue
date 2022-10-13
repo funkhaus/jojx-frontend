@@ -1,8 +1,8 @@
 <template lang="html">
     <div class="contact-team">
-        <h2 class="section-title">
+        <h3 class="section-title">
             Team
-        </h2>
+        </h3>
         <div class="reps">
             <block-rep
                 v-for="item in items"

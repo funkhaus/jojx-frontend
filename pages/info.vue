@@ -17,10 +17,8 @@
 <script>
 // Queries
 import INFO from "~/gql/queries/Info"
-import ContactTeam from "../components/ContactTeam.vue"
 
 export default {
-    components: { ContactTeam },
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(INFO, {
             uri: route.path
@@ -31,7 +29,6 @@ export default {
     },
     computed: {
         infoData() {
-            // Shape data from WP-GQL to work with template
             return {
                 ...this.page,
                 image: this?.page?.featuredImage?.node || {},
@@ -70,7 +67,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .page-info {
-
-// }
+.page-info {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
 </style>

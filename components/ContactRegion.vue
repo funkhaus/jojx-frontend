@@ -37,7 +37,6 @@
             <wp-image
                 :image="image"
                 class="image"
-                mode="cover"
             />
         </div>
     </div>
@@ -136,7 +135,9 @@ export default {
         }
     }
     .image {
-        min-height: 350px;
+        max-width: 780px;
+        width: 100%;
+        height: 100%;
     }
 
     // Breakpoints
@@ -144,7 +145,7 @@ export default {
         padding: 0 190px;
 
         .image {
-            min-height: 520px;
+            max-width: 1150px;
         }
     }
     @media #{$lt-tablet} {
@@ -178,7 +179,7 @@ export default {
             margin-bottom: 35px;
         }
         .image {
-            min-height: 230px;
+            max-width: 100%;
         }
     }
 }
