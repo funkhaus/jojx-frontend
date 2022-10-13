@@ -5,7 +5,8 @@ query Reel($uri: String!) {
         ... on Page {
             id
             title
-            encodedContent
+            text: encodedContent
+            excerpt
             featuredImage {
                 node {
                     ...MediaImage

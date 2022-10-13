@@ -52,7 +52,7 @@ export default {
         background-color: var(--theme-color-nav);
         width: 100%;
         height: 2px;
-        transform: translate(50%, 0);
+        transform: translate(25%, 0);
         opacity: 0;
 
         transition: opacity 0.4s var(--easing-authentic-motion);

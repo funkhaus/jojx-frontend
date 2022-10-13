@@ -1,21 +1,18 @@
 <template>
     <section class="page-reel">
-        {{ page.title }}
+        <roster-item
+            class="title"
+            :text="page.title"
+            element="h2"
+        />
 
-        <!-- <ul class="items">
-            <li
-                v-for="item in items"
-                :key="item.title"
-                class="item"
-            >
-                <a
-                    :href="item.to"
-                    v-html="item.title"
-                />
-            </li>
-        </ul> -->
-
-        <grid-work :items="gridItems" />
+        <grid-work :items="gridItems">
+            <talent-bio
+                :text="bio.text"
+                :excerpt="bio.excerpt"
+                :image="bio.image"
+            />
+        </grid-work>
     </section>
 </template>
 
@@ -34,15 +31,15 @@ export default {
         }
     },
     computed: {
-        parsedItems() {
-            return this.items.map((obj) => {
-                return {
-                    ...obj,
-                    image: obj?.featuredImage?.node || {}
-                }
-            })
+        bio() {
+            return {
+                ...this.page,
+                image: this.page?.featuredImage?.node || {},
+                imageSecondary:
+                    this.page?.secondaryFeaturedImage?.secondaryFeaturedImage ||
+                    {}
+            }
         },
-
         gridItems() {
             // let items = this.page?.children?.nodes?.[1].children?.nodes || []
 
@@ -72,9 +69,27 @@ export default {
     margin: 0 auto;
     min-height: var(--unit-100vh);
 
-    .image {
-        max-width: 50%;
-        margin: 0 auto;
+    .title {
+        display: block;
+        font-size: 175px;
+        line-height: 1;
+
+        margin: 230px auto 100px auto;
+        text-align: center;
+        white-space: break-spaces;
+        display: flex;
+        flex-direction: column;
+
+        ::v-deep .word {
+            &:nth-of-type(n) {
+                font-style: normal;
+                text-transform: inherit;
+            }
+
+            &:last-of-type {
+                padding-right: 0;
+            }
+        }
     }
 
     // DELETE
@@ -90,7 +105,16 @@ export default {
     }
 
     /* Breakpoints */
+    @media #{$lt-tablet} {
+        .title {
+            font-size: 125px;
+        }
+    }
     @media #{$lt-phone} {
+        .title {
+            font-size: 65px;
+            margin: 210px auto 85px auto;
+        }
     }
 }
 </style>

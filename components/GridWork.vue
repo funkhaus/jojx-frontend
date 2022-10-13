@@ -1,18 +1,20 @@
 <template>
     <div :class="classes">
-        <!-- foo -->
-
-        <block-work
-            v-for="item in items"
-            :key="item.id"
-            class="item"
-            :image="item.image"
-            :type="item.type"
-            :to="item.to"
-            :title="item.title"
-            :text="item.text"
-            :tags="item.tags"
-        />
+        <template v-for="(item, i) in items">
+            <block-work
+                :key="item.id"
+                class="item"
+                :image="item.image"
+                :type="item.type"
+                :to="item.to"
+                :title="item.title"
+                :text="item.text"
+                :tags="item.tags"
+            />
+            <template v-if="i == 3">
+                <slot />
+            </template>
+        </template>
     </div>
 </template>
 
