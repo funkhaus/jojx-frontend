@@ -23,6 +23,7 @@
         "@nuxtjs/sitemap": "^2.4.0",
         "@nuxtjs/storybook": "^4.3.2",
         "@nuxtjs/style-resources": "^1.2.1",
+        "@vimeo/player": "^2.18.0",
         "@wordpress/autop": "^3.2.1",
         "core-js": "^3.17.1",
         "eslint": "^8.18.0",
@@ -30,6 +31,7 @@
         "eslint-plugin-vue": "^9.1.1",
         "graphql": "^15.8.0",
         "graphql-tag": "^2.12.6",
+        "intrinsic-scale": "^3.0.4",
         "lodash": "^4.17.21",
         "nodemon": "^2.0.12",
         "nuxt-graphql-request": "^5.2.0",
@@ -40,7 +42,8 @@
         "vue-svg-loader": "^0.16.0",
         "vue-template-compiler": "^2.6.12",
         "webfontloader": "^1.6.28",
-        "webpack": "^4.46.0"
+        "webpack": "^4.46.0",
+        "youtube-player": "^5.5.2"
     },
     "comments": {
         "devDependencies": "Graphql can't go past v15"

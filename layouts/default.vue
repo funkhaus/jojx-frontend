@@ -15,23 +15,39 @@
 
         <global-logo v-if="showLogo" />
 
-        <global-nav
-            class="nav directors"
-            :to="'/directors/'"
-            text="directors"
-        />
+        <transition-group>
+            <global-nav
+                v-if="!showNav"
+                key="back"
+                class="nav back"
+                to="../"
+                text="back"
+            />
 
-        <global-nav
-            class="nav studio"
-            :to="'/studio/'"
-            text="studio"
-        />
+            <global-nav
+                v-if="showNav"
+                key="directors"
+                class="nav directors"
+                :to="'/directors/'"
+                text="directors"
+            />
 
-        <global-nav
-            class="nav info"
-            :to="'/info/'"
-            text="info"
-        />
+            <global-nav
+                v-if="showNav"
+                key="studio"
+                class="nav studio"
+                :to="'/studio/'"
+                text="studio"
+            />
+
+            <global-nav
+                v-if="showNav"
+                key="info"
+                class="nav info"
+                :to="'/info/'"
+                text="info"
+            />
+        </transition-group>
 
         <nuxt
             class="page"
@@ -134,6 +150,16 @@ export default {
             }
             return show
         },
+        showNav() {
+            let show = true
+            switch (this.$route.name) {
+                case "directors-director-detail":
+                case "studio-studio-detail":
+                    show = false
+                    break
+            }
+            return show
+        },
         breakpoint() {
             const winWidth = this.$store.state.winWidth
             let breakpoint = "desktop"
@@ -179,16 +205,18 @@ export default {
         left: var(--unit-gap);
         transform: rotate(90deg) translate(20%, 0%);
     }
-    .nav.studio {
+    .nav.studio,
+    .nav.back {
         top: var(--unit-gap);
         right: var(--unit-gap);
         transform: rotate(90deg) translate(0%, -150%);
         transform-origin: center;
     }
+
     .nav.info {
         bottom: var(--unit-gap);
         right: var(--unit-gap);
-        transform: rotate(90deg) translate(50%, -50%);
+        transform: rotate(90deg) translate(10%, -40%);
         transform-origin: right;
     }
 }

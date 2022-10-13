@@ -8,6 +8,14 @@ query Detail($uri: String!) {
             title
             to: uri
             ...GutenbergBlocks
+            parent {
+                node {
+                    ... on Page {
+                        id
+                        title
+                    }
+                }
+            }
             secondaryFeaturedImage {
                 secondaryFeaturedImage {
                     ...MediaImage

@@ -1,6 +1,6 @@
 <template>
     <nuxt-link
-        to="to"
+        :to="to"
         :class="classes"
     >
         <wp-image

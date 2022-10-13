@@ -2,7 +2,7 @@
     <section class="page-reel">
         {{ page.title }}
 
-        <ul class="items">
+        <!-- <ul class="items">
             <li
                 v-for="item in items"
                 :key="item.title"
@@ -13,7 +13,9 @@
                     v-html="item.title"
                 />
             </li>
-        </ul>
+        </ul> -->
+
+        <grid-work :items="gridItems" />
     </section>
 </template>
 
@@ -37,6 +39,26 @@ export default {
                 return {
                     ...obj,
                     image: obj?.featuredImage?.node || {}
+                }
+            })
+        },
+
+        gridItems() {
+            // let items = this.page?.children?.nodes?.[1].children?.nodes || []
+
+            return this.items.map((obj) => {
+                // Start by flatterning the "attributes"
+                return {
+                    ...obj,
+                    image: obj?.featuredImage?.node || {},
+                    imageSecondary:
+                        obj?.secondaryFeaturedImage?.secondaryFeaturedImage ||
+                        {},
+                    tags: obj?.tags?.nodes || [],
+                    type: obj?.workMeta?.type || "",
+                    link: obj?.workMeta?.link || "",
+                    publication: obj?.workMeta?.publication || "",
+                    talent: obj?.workMeta?.talentRelationship?.title || ""
                 }
             })
         }

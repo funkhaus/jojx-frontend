@@ -3,6 +3,7 @@
         <wp-menu
             name="Social Menu"
             class="menu"
+            :is-footer="true"
         />
     </div>
 </template>

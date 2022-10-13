@@ -11,6 +11,7 @@
             :key="i"
             class="menu-item"
             :item="item"
+            :is-footer="isFooter"
             @menu-interacted="menuInteracted"
         />
 
@@ -30,17 +31,21 @@ export default {
     props: {
         name: {
             type: String,
-            default: "",
+            default: ""
         },
         items: {
             type: Array,
-            default: () => [],
+            default: () => []
         },
+        isFooter: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
             menuItems: this.items,
-            hasLoaded: false,
+            hasLoaded: false
         }
     },
     async fetch() {
@@ -52,7 +57,7 @@ export default {
 
         try {
             const data = await this.$graphql.default.request(MENU_BY_NAME, {
-                name: this.name,
+                name: this.name
             })
             this.menuItems = _get(data, "menu.menuItems.nodes", [])
             this.hasLoaded = true
@@ -66,14 +71,14 @@ export default {
             return [
                 "wp-menu",
                 `name-${_kebabCase(this.name) || "unknown"}`,
-                { "has-loaded": this.hasLoaded },
+                { "has-loaded": this.hasLoaded }
             ]
-        },
+        }
     },
     watch: {
         name() {
             this.$fetch()
-        },
+        }
     },
     fetchKey(getCounter) {
         return `${this.name}-${getCounter(this.name)}`
@@ -87,7 +92,7 @@ export default {
     methods: {
         menuInteracted(event) {
             this.$emit("menu-interacted", event)
-        },
-    },
+        }
+    }
 }
 </script>

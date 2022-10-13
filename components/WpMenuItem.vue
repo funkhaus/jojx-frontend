@@ -1,7 +1,15 @@
 <template>
     <li :class="classes">
+        <effect-text-hover
+            v-if="isFooter"
+            :to="relativeUrl"
+            class="menu-link link-internal"
+            :text="item.label"
+            @click.native="menuInteracted"
+        />
+
         <a
-            v-if="!isRelative || isMailTo"
+            v-if="(!isRelative && !isFooter) || isMailTo"
             :target="isTargetBlank"
             :href="item.url"
             class="menu-link link-external"
@@ -10,7 +18,7 @@
         />
 
         <nuxt-link
-            v-if="isRelative && !isHash"
+            v-if="isRelative && !isHash && !isFooter"
             :to="relativeUrl"
             class="menu-link link-internal"
             @click.native="menuInteracted"
@@ -18,7 +26,7 @@
         />
 
         <span
-            v-if="isHash"
+            v-if="isHash && !isFooter"
             class="menu-label"
             v-html="item.label"
         />
@@ -46,19 +54,23 @@ export default {
     props: {
         item: {
             type: Object,
-            default: () => ({}),
+            default: () => ({})
         },
+        isFooter: {
+            type: Boolean,
+            default: false
+        }
     },
     computed: {
         classes() {
             return [
                 "wp-menu-item menu-item",
                 {
-                    "is-realtive": this.isRelative,
+                    "is-realtive": this.isRelative
                 },
                 { "has-sub-menu": this.hasSubMenu },
                 { "is-disabled": this.isHash },
-                ...this.item.cssClasses,
+                ...this.item.cssClasses
             ]
         },
         getChildren() {
@@ -92,18 +104,18 @@ export default {
             // Replace all these things
             const replaceThese = [
                 _get(this, "$store.state.siteMeta.frontendUrl", ""),
-                _get(this, "$store.state.siteMeta.backendUrl", ""),
+                _get(this, "$store.state.siteMeta.backendUrl", "")
             ]
             replaceThese.forEach((element) => {
                 url = url.replace(element, "")
             })
             return url
-        },
+        }
     },
     methods: {
         menuInteracted(event) {
             this.$emit("menu-interacted", event)
-        },
-    },
+        }
+    }
 }
 </script>

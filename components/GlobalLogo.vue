@@ -33,7 +33,7 @@ export default {
 .global-logo {
     position: fixed;
     z-index: 700;
-    bottom: var(--unit-gap);
+    bottom: 30px;
     left: var(--unit-gap);
     mix-blend-mode: difference;
     transform-origin: bottom left;

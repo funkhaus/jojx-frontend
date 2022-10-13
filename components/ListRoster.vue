@@ -9,9 +9,10 @@
                 <nuxt-link
                     class="link"
                     :to="item.to"
-                    v-html="item.title"
-                />
-                <!-- TODO: add italics and uppercase -->
+                >
+                    <roster-item :text="item.title" />
+                </nuxt-link>
+
                 <transition name="fade">
                     <wp-image
                         :image="item.image"
@@ -33,7 +34,6 @@ export default {
             default: () => []
         }
     },
-
     computed: {
         classes() {
             return ["list-roster"]
@@ -67,7 +67,6 @@ export default {
     }
 
     .link {
-        position: relative;
         z-index: 50;
         display: block;
         cursor: pointer;
@@ -129,8 +128,6 @@ export default {
         .list {
             width: 100%;
         }
-        // .list-item {
-        // }
 
         .list-item:nth-of-type(n) .link {
             text-align: left;
