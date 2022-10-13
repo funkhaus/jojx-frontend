@@ -59,7 +59,6 @@ export default {
     }
 
     .list-item {
-        position: relative;
         padding: 0;
 
         transition: opacity 0.4s var(--easing-authentic-motion),
