@@ -40,7 +40,9 @@ export default {
 
     transform: scale(0.2); // 145 / 716 = .2
     transition: all 0.6s var(--easing-authentic-motion);
+
     .route-index & {
+        pointer-events: none;
         transform: translate(0, calc(-50vh + 100%));
     }
     .route-index .is-scrolled & {
@@ -49,6 +51,12 @@ export default {
 
     .svg path {
         fill: var(--color-white);
+    }
+
+    @media #{$has-hover} {
+        &:hover {
+            transform: scale(0.25); // 112 / 716 = .2
+        }
     }
 
     // Breakpoints

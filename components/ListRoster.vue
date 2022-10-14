@@ -1,29 +1,27 @@
 <template>
-    <div :class="classes">
-        <ul class="list">
-            <li
-                v-for="(item, i) in items"
-                :key="item.title"
-                class="list-item"
+    <ul :class="classes">
+        <li
+            v-for="(item, i) in items"
+            :key="item.title"
+            class="list-item"
+        >
+            <nuxt-link
+                class="link"
+                :to="item.to"
             >
-                <nuxt-link
-                    class="link"
-                    :to="item.to"
-                >
-                    <roster-item :text="item.title" />
-                </nuxt-link>
+                <roster-item :text="item.title" />
+            </nuxt-link>
 
-                <transition name="fade">
-                    <wp-image
-                        :image="item.image"
-                        class="image"
-                    >
-                        <div class="scrim" />
-                    </wp-image>
-                </transition>
-            </li>
-        </ul>
-    </div>
+            <transition name="fade">
+                <wp-image
+                    :image="item.image"
+                    class="image"
+                >
+                    <div class="scrim" />
+                </wp-image>
+            </transition>
+        </li>
+    </ul>
 </template>
 
 <script>
@@ -45,18 +43,14 @@ export default {
 <style lang="scss" scoped>
 .list-roster {
     padding: 0 40px;
+    margin: 0;
     height: 100%;
     width: 100%;
+    position: relative;
+    list-style: none;
 
-    .list {
-        margin: 0;
-        padding: 0;
-
-        list-style: none;
-
-        transition: opacity 0.6s var(--easing-authentic-motion),
-            transform 0.6s var(--easing-authentic-motion);
-    }
+    transition: opacity 0.6s var(--easing-authentic-motion),
+        transform 0.6s var(--easing-authentic-motion);
 
     .list-item {
         padding: 0;
@@ -104,11 +98,11 @@ export default {
     /* Hover State */
     @media #{$has-hover} {
         ::v-deep .list-item:hover {
-            z-index: 400;
             opacity: 1;
             color: var(--color-white);
 
             .image {
+                z-index: 10;
                 opacity: 1;
                 transform: translate(-25%, -50%);
             }
@@ -124,9 +118,7 @@ export default {
     }
 
     @media #{$lt-tablet} {
-        .list {
-            width: 100%;
-        }
+        width: 100%;
 
         .list-item:nth-of-type(n) .link {
             text-align: left;

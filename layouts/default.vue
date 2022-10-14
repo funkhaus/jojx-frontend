@@ -13,7 +13,7 @@
             @interacted="toggleMenu"
         />
 
-        <global-logo v-if="showLogo" />
+        <global-logo />
 
         <transition-group>
             <global-nav
@@ -118,7 +118,7 @@ export default {
             switch (this.$route.name) {
                 case "index":
                 case "directors-director":
-                    // output = "white"
+                case "studio-studio":
                     output = this.$store.state.theme || "white"
                     break
                 case "directors":
@@ -129,16 +129,6 @@ export default {
                     break
             }
             return output
-        },
-        showLogo() {
-            let show = true
-            switch (this.$route.name) {
-                case "directors":
-                case "studio":
-                    show = false
-                    break
-            }
-            return show
         },
         showFooter() {
             let show = true
