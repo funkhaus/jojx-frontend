@@ -30,13 +30,8 @@ query Detail($uri: String!) {
                 type
                 publication
                 link
-                talentRelationship {
-                    ... on Page {
-                        title
-                        id
-                        uri
-                    }
-                }
+                talentName
+                videoUrl
             }
         }
     }

@@ -64,40 +64,40 @@ export default {
     props: {
         src: {
             type: String,
-            default: "",
+            default: ""
         },
         playsinline: {
             type: Boolean,
-            default: true,
+            default: true
         },
         autoplay: {
             type: Boolean,
-            default: true,
+            default: true
         },
         color: {
             type: String,
-            default: "ffffff",
+            default: "ffffff"
         },
         controls: {
             type: Boolean,
-            default: true,
+            default: true
         },
         muted: {
             type: Boolean,
-            default: false,
+            default: false
         },
         mode: {
             type: String,
-            default: "css",
+            default: "css"
         },
         syncSlotWidth: {
             type: Boolean,
-            default: false,
+            default: false
         },
         customPlayer: {
             type: Boolean,
-            default: false,
-        },
+            default: false
+        }
     },
     data() {
         return {
@@ -107,7 +107,7 @@ export default {
             width: 1280,
             styleHeight: "",
             styleWidth: "",
-            title: "",
+            title: ""
         }
     },
     computed: {
@@ -118,13 +118,13 @@ export default {
                 { "has-loaded": this.hasLoaded },
                 { "player-custom": this.isCustomPlayer },
                 { "player-vimeo": this.isVimeo },
-                { "player-youtube": this.isYouTube },
+                { "player-youtube": this.isYouTube }
             ]
         },
         slotStyles() {
             if (this.syncSlotWidth && this.styleWidth) {
                 return {
-                    width: `${this.styleWidth}px`,
+                    width: `${this.styleWidth}px`
                 }
             }
         },
@@ -132,7 +132,7 @@ export default {
             if (this.styleHeight || this.styleWidth) {
                 return {
                     height: `${this.styleHeight}px`,
-                    width: `${this.styleWidth}px`,
+                    width: `${this.styleWidth}px`
                 }
             }
         },
@@ -200,7 +200,7 @@ export default {
             }
 
             return url
-        },
+        }
     },
     mounted() {
         switch (true) {
@@ -259,8 +259,8 @@ export default {
                     playsinline: Number(this.playsinline),
                     color: this.color,
                     rel: 0,
-                    modestbranding: 1,
-                },
+                    modestbranding: 1
+                }
             })
 
             // Set meta loaded classes
@@ -297,14 +297,14 @@ export default {
             // init player
             this.player = new VimeoPlayer(this.$refs.iframe, {
                 muted: this.muted,
-                playsinline: this.playsinline,
+                playsinline: this.playsinline
             })
 
             // Get and set player size and title
             const meta = await Promise.all([
                 this.player.getVideoWidth(),
                 this.player.getVideoHeight(),
-                this.player.getVideoTitle(),
+                this.player.getVideoTitle()
             ])
             this.width = meta[0]
             this.height = meta[1]
@@ -341,7 +341,7 @@ export default {
             // Measure each slot height
             let slots = _compact([
                 this.$refs.top || false,
-                this.$refs.bottom || false,
+                this.$refs.bottom || false
             ])
 
             heightOffset = slots.reduce((acc, slot) => {
@@ -366,7 +366,7 @@ export default {
             // Emit dimensions event
             this.$emit("resized", {
                 width: width,
-                height: height,
+                height: height
             })
         },
         onCustomPlayerLoaded(dimensions) {
@@ -375,8 +375,8 @@ export default {
             this.height = dimensions.height
             this.sizeVideo()
             this.hasLoaded = true
-        },
-    },
+        }
+    }
 }
 </script>
 

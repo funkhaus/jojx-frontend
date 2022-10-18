@@ -75,7 +75,7 @@ export default {
                     type: obj?.workMeta?.type || "",
                     link: obj?.workMeta?.link || "",
                     publication: obj?.workMeta?.publication || "",
-                    talent: obj?.workMeta?.talentRelationship?.title || ""
+                    talent: obj?.workMeta?.talentName || ""
                 }
             })
         },

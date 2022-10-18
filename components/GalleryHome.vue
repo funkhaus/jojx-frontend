@@ -1,5 +1,6 @@
 <template>
     <div :class="classes">
+        <!-- TODO: animate blocks -->
         <div
             v-for="item in items"
             :key="item.id"

@@ -8,7 +8,7 @@
             />
             <gallery-home
                 :items="galleryItems"
-                :intro-is-complete="introIsComplete"
+                :intro-is-complete="!$store.state.introIsActive"
             />
         </div>
 
@@ -38,14 +38,12 @@ export default {
             page: data?.nodeByUri || {}
         }
     },
-    data() {
-        return {
-            introIsComplete: false
-        }
-    },
     computed: {
         classes() {
-            return ["page-home", { "intro-is-complete": this.introIsComplete }]
+            return [
+                "page-home",
+                { "intro-is-complete": !this.$store.state.introIsActive }
+            ]
         },
         introImage() {
             return this.page?.featuredImage?.node || {}
@@ -77,7 +75,8 @@ export default {
                     type: obj?.workMeta?.type || "",
                     link: obj?.workMeta?.link || "",
                     publication: obj?.workMeta?.publication || "",
-                    talent: obj?.workMeta?.talentRelationship?.title || ""
+                    talent: obj?.workMeta?.talentName || "",
+                    category: obj?.workMeta?.workCategory || ""
                 }
             })
         }
@@ -91,12 +90,20 @@ export default {
     },
     methods: {
         playIntro() {
+            this.$store.commit("SET_INTRO", true)
+
+            // start at top
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+
             setTimeout(() => {
-                this.introIsComplete = true
+                this.endIntro()
             }, 2000)
         },
         endIntro() {
-            this.introIsComplete = true
+            this.$store.commit("SET_INTRO", false)
         },
         onIntersected(event) {
             if (event.detail.isIntersecting) {
@@ -111,11 +118,10 @@ export default {
 
 <style lang="scss" scoped>
 .page-home {
-    height: 200vh; //DELETE
     min-height: var(--unit-100vh);
+    height: 100%;
     margin: 0 auto;
     overflow: hidden;
-
     .panel-top {
         position: relative;
         background-color: var(--color-black);

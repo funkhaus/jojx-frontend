@@ -3,16 +3,15 @@
         <div class="container">
             <!-- .container allows for paddings to work with ratio sizing-->
 
-            <lazy-video-player
+            <!-- <lazy-video-player
                 v-if="hasCustomPlayer && isVimeo"
                 :src="url"
                 :title="caption"
                 :dimensions="dimensions"
                 :autoplay="false"
-            />
+            /> -->
 
             <iframe
-                v-else
                 class="iframe"
                 :src="iFrameSrc"
                 :title="caption"
@@ -40,24 +39,24 @@ export default {
     props: {
         url: {
             type: String,
-            default: "",
+            default: ""
         },
         provider: {
             type: String,
-            default: "",
+            default: ""
         },
         caption: {
             type: String,
-            default: "",
+            default: ""
         },
         color: {
             type: String,
-            default: "",
+            default: ""
         },
         wpClasses: {
             type: String,
-            default: "",
-        },
+            default: ""
+        }
     },
     computed: {
         classes() {
@@ -65,7 +64,7 @@ export default {
                 "gutenberg-embed",
                 "margin-section",
                 { "is-vimeo": this.isVimeo },
-                { "is-youtube": this.isYouTube },
+                { "is-youtube": this.isYouTube }
             ]
         },
         hasCustomPlayer() {
@@ -73,7 +72,7 @@ export default {
         },
         sizerStyles() {
             return {
-                "padding-top": `${this.aspectRatio}%`,
+                "padding-top": `${this.aspectRatio}%`
             }
         },
         isVimeo() {
@@ -122,7 +121,7 @@ export default {
         dimensions() {
             let output = {
                 height: 720,
-                width: 1280,
+                width: 1280
             }
 
             // Go through each class, and figure out the ratio from this: "wp-embed-aspect-16-9"
@@ -140,8 +139,8 @@ export default {
         },
         aspectRatio() {
             return (this.dimensions.height / this.dimensions.width) * 100
-        },
-    },
+        }
+    }
 }
 </script>
 

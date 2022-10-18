@@ -12,14 +12,10 @@
                 <roster-item :text="item.title" />
             </nuxt-link>
 
-            <transition name="fade">
-                <wp-image
-                    :image="item.image"
-                    class="image"
-                >
-                    <div class="scrim" />
-                </wp-image>
-            </transition>
+            <wp-image
+                :image="item.image"
+                class="image"
+            />
         </li>
     </ul>
 </template>
@@ -72,7 +68,7 @@ export default {
     }
 
     ::v-deep .image {
-        position: absolute;
+        position: absolute !important;
         top: 50%;
         left: 50%;
         z-index: -1;

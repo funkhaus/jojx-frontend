@@ -33,7 +33,7 @@ export default {
     justify-content: center;
     width: 100%;
     margin-top: var(--unit-gap);
-    margin-bottom: var(--unit-gap);
+    margin-bottom: 30px;
 
     .menu ::v-deep {
         list-style: none;

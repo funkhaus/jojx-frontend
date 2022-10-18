@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="global-nav">
+    <div :class="classes">
         <effect-text-hover
             :text="text"
             :to="to"
@@ -17,11 +17,15 @@ export default {
         to: {
             type: String,
             default: ""
+        },
+        hideUnderline: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
         classes() {
-            return ["global-nav"]
+            return ["global-nav", { "hide-underline": this.hideUnderline }]
         }
     }
 }
@@ -61,6 +65,10 @@ export default {
 
     ::v-deep .effect-text-hover.active-link:after {
         opacity: 1;
+    }
+
+    &.hide-underline ::v-deep .effect-text-hover:after {
+        display: none;
     }
     // Breakpoints
     @media #{$has-hover} {

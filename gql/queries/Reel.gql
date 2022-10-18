@@ -17,6 +17,7 @@ query Reel($uri: String!) {
                     ...MediaImage
                 }
             }
+
             children(first: 99) {
                 nodes {
                     ... on Page {
@@ -43,13 +44,7 @@ query Reel($uri: String!) {
                             type
                             publication
                             link
-                            talentRelationship {
-                                ... on Page {
-                                    title
-                                    id
-                                    uri
-                                }
-                            }
+                            talentName
                         }
                     }
                 }

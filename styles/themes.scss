@@ -8,11 +8,13 @@
     --theme-color-text: var(--color-white);
     --theme-color-nav: var(--color-white);
 }
+:root,
 .theme-white {
     --theme-color-background: var(--color-white);
     --theme-color-text: var(--color-black);
     --theme-color-nav: var(--color-white);
 }
+:root,
 .theme-gray {
     --theme-color-background: var(--color-gray);
     --theme-color-text: var(--color-black);

@@ -11,7 +11,7 @@
                 class="video-stage"
                 :sync-slot-width="true"
                 :custom-player="true"
-                color="ffb762"
+                color="ffffff"
             />
             <!-- mode="intrinsic-ratio" -->
 
@@ -29,8 +29,18 @@
                     v-text="parsedPage.category"
                 />
             </div>
+
+            <button
+                v-if="parsedPage.blocks.length"
+                class="cta"
+                @click="onClick"
+                v-text="'Read More'"
+            />
         </div>
-        <div class="panel-bottom">
+        <div
+            ref="bottom"
+            class="panel-bottom"
+        >
             <wp-gutenberg
                 id="content"
                 :blocks="parsedPage.blocks"
@@ -42,10 +52,8 @@
 <script>
 // Queries
 import DETAIL from "~/gql/queries/Detail"
-import RosterItem from "../components/RosterItem.vue"
 
 export default {
-    components: { RosterItem },
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(DETAIL, {
             uri: route.path
@@ -60,9 +68,17 @@ export default {
             return {
                 ...this.page,
                 videoUrl: this.page?.workMeta?.videoUrl || "",
-                talent: this.page?.parent?.node?.title || "",
+                talent:
+                    this.page?.workMeta?.talentName ||
+                    this.page?.parent?.node?.title ||
+                    "",
                 category: "wildcard"
             }
+        }
+    },
+    methods: {
+        onClick() {
+            this.$refs.bottom.scrollIntoView({ behavior: "smooth" })
         }
     }
 }
@@ -83,7 +99,7 @@ export default {
     .video-stage {
         min-height: 550px;
 
-        height: calc(var(--unit-100vh) - 230px);
+        height: calc(var(--unit-100vh) - 100px);
         width: calc(100% - 180px);
         margin: 0 auto;
         &.has-loaded {
@@ -94,7 +110,8 @@ export default {
         position: absolute;
         width: 100%;
         bottom: 20px;
-        right: 40px;
+        right: 0;
+        padding: 0 40px 0 0;
 
         display: flex;
         flex-direction: column;
@@ -110,6 +127,24 @@ export default {
         line-height: 1.4;
         transition: clip-path 0.6s var(--easing-authentic-motion);
     }
+
+    .cta {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        color: var(--color-white);
+        font-size: 16px;
+        font-weight: 300;
+        text-transform: capitalize;
+        padding: 20px;
+        transition: opacity 0.6s var(--easing-authentic-motion);
+    }
+    .is-scrolled & .cta {
+        opacity: 0;
+    }
+
     .category {
         font-style: italic;
     }
@@ -118,6 +153,7 @@ export default {
         position: absolute;
         top: 30px;
         left: 40px;
+        margin: 0;
 
         font-size: 36px;
     }
@@ -152,12 +188,29 @@ export default {
                 flex-direction: column;
             }
         }
+        .talent {
+            font-size: 20px;
+            top: 20px;
+            left: 20px;
+        }
         .title,
         .category {
-            font-size: 14px;
+            font-size: 20px;
+        }
+        // TODO: Fix positioning
+        .titles {
+            padding-right: 20px;
+            transform: translate(0, -200%);
         }
         .category {
-            margin-top: 20px;
+            font-size: 17px;
+            margin-top: 5px;
+        }
+        .cta {
+            bottom: 0;
+            left: unset;
+            right: 0;
+            transform: translate(0, -100%);
         }
     }
 }

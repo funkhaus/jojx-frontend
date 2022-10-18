@@ -5,11 +5,15 @@
                 :key="item.id"
                 class="item"
                 :image="item.image"
+                :index="i"
+                :image-secondary="item.imageSecondary"
                 :type="item.type"
                 :to="item.to"
                 :title="item.title"
                 :text="item.text"
-                :tags="item.tags"
+                :talent="item.talent"
+                :category="item.category"
+                :publication="item.publication"
             />
             <template v-if="i == 3">
                 <slot />
@@ -41,10 +45,6 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
-    .item {
-        width: 50%;
-    }
 
     // Breakpoints
     @media #{$lt-phone} {

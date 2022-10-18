@@ -15,13 +15,14 @@ query Home {
                     ... on Page {
                         id
                         title
-                        text: encodedContent
+
                         children(first: 99) {
                             nodes {
                                 ... on Page {
                                     id
                                     title
                                     to: uri
+                                    text: encodedContent
                                     tags {
                                         nodes {
                                             id
@@ -42,13 +43,8 @@ query Home {
                                         type
                                         publication
                                         link
-                                        talentRelationship {
-                                            ... on Page {
-                                                title
-                                                id
-                                                uri
-                                            }
-                                        }
+                                        talentName
+                                        workCategory
                                     }
                                 }
                             }

@@ -10,7 +10,8 @@ export const state = () => ({
     winHeight: 0,
     winWidth: 0,
     referrer: false,
-    theme: ""
+    theme: "",
+    introIsActive: false
 })
 
 // Define mutations
@@ -39,6 +40,9 @@ export const mutations = {
     },
     SET_THEME(state, data) {
         state.theme = data
+    },
+    SET_INTRO(state, bool) {
+        state.introIsActive = bool
     }
 }
 

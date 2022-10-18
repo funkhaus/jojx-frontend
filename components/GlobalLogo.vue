@@ -41,6 +41,8 @@ export default {
     transform: scale(0.2); // 145 / 716 = .2
     transition: all 0.6s var(--easing-authentic-motion);
 
+    .intro-is-active.route-index .is-scrolled &,
+    .intro-is-active.route-index &,
     .route-index & {
         pointer-events: none;
         transform: translate(0, calc(-50vh + 100%));
@@ -60,8 +62,24 @@ export default {
     }
 
     // Breakpoints
+    @media #{$lt-tablet} {
+        transform: scale(0.25); // 177 / 716 = .25
+
+        .intro-is-active.route-index .is-scrolled &,
+        .intro-is-active.route-index &,
+        .route-index & {
+            transform: scale(0.4) translate(0, calc(-50vh - 300px)); //292 / 716 = .25
+        }
+        .route-index .is-scrolled & {
+            transform: scale(0.25);
+        }
+    }
     @media #{$lt-phone} {
-        transform: scale(0.15); // 112 / 716 = .2
+        transform: scale(0.15); // 112 / 716 = .15
+
+        .route-index .is-scrolled & {
+            transform: scale(0.15);
+        }
     }
 }
 </style>

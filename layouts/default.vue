@@ -15,13 +15,14 @@
 
         <global-logo />
 
-        <transition-group>
+        <transition-group name="fade">
             <global-nav
                 v-if="!showNav"
                 key="back"
                 class="nav back"
-                to="../"
+                :to="breadcrumb"
                 text="back"
+                :hide-underline="true"
             />
 
             <global-nav
@@ -87,6 +88,8 @@ export default {
             const classes = ["body", `theme-${this.themeName}`]
             classes.push(`route-${_kebabCase(this.$route.name || "error")}`)
 
+            this.$store.state.introIsActive && classes.push("intro-is-active")
+
             // This is how you add a class conditionally
             // this.foo && classes.push("foo")
 
@@ -113,6 +116,18 @@ export default {
                 `scrolling-${this.$store.state.scrollDirection}`
             ]
         },
+        breadcrumb() {
+            let path = "../"
+
+            if (this.$route?.name?.includes("featured")) {
+                path = "/"
+            }
+
+            if (this.$store.state?.referrer?.path) {
+                path = this.$store.state.referrer.path
+            }
+            return path
+        },
         themeName() {
             let output = "white"
             switch (this.$route.name) {
@@ -125,6 +140,7 @@ export default {
                 case "directors-director-detail":
                 case "studio":
                 case "studio-studio-detail":
+                case "featured-type-detail":
                     output = "black"
                     break
             }
@@ -146,6 +162,7 @@ export default {
             switch (this.$route.name) {
                 case "directors-director-detail":
                 case "studio-studio-detail":
+                case "featured-type-detail":
                     show = false
                     break
             }
@@ -207,8 +224,15 @@ export default {
     .nav.info {
         bottom: var(--unit-gap);
         right: var(--unit-gap);
-        transform: rotate(90deg) translate(10%, -40%);
+        transform: rotate(90deg) translate(60%, -40%);
         transform-origin: right;
+    }
+    @media #{$lt-phone} {
+        .nav.back {
+            top: 80px;
+            right: 40px;
+            display: block;
+        }
     }
 }
 </style>

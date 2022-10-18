@@ -31,13 +31,13 @@ export default {
         infoData() {
             return {
                 ...this.page,
-                image: this?.page?.featuredImage?.node || {},
-                address: this?.page?.contactMeta?.address || "",
-                phone: this?.page?.contactMeta?.telephone || "",
-                email: this?.page?.contactMeta?.email || "",
-                mapUrl: this?.page?.contactMeta?.addressLink || "",
-                socialLinks: this?.page?.contactMeta?.socials || [],
-                title: this?.page?.encodedContent || ""
+                image: this.page?.featuredImage?.node || {},
+                address: this.page?.contactMeta?.address || "",
+                phone: this.page?.contactMeta?.telephone || "",
+                email: this.page?.contactMeta?.email || "",
+                mapUrl: this.page?.contactMeta?.addressLink || "",
+                socialLinks: this.page?.contactMeta?.socials || [],
+                title: this.page?.encodedContent || ""
             }
         },
         teamReps() {
@@ -45,9 +45,9 @@ export default {
             return team.map((obj) => {
                 return {
                     ...obj,
-                    email: obj.email || "",
-                    name: obj.name || "",
-                    position: obj.position || ""
+                    email: obj?.email || "",
+                    name: obj?.name || "",
+                    position: obj?.position || ""
                 }
             })
         },
@@ -56,9 +56,9 @@ export default {
             return regions.map((obj) => {
                 return {
                     ...obj,
-                    location: obj.location || "",
-                    company: obj.company || "",
-                    reps: obj.rep || {}
+                    location: obj?.location || "",
+                    company: obj?.company || "",
+                    reps: obj?.rep || {}
                 }
             })
         }
