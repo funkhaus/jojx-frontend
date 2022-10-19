@@ -1,12 +1,14 @@
 <template>
     <section :class="classes">
-        <roster-item
-            ref="title"
-            class="title"
-            :text="page.title"
-            element="h2"
-            :style="titleStyles"
-        />
+        <div class="panel-top">
+            <roster-item
+                ref="title"
+                class="title"
+                :text="page.title"
+                element="h2"
+                :style="titleStyles"
+            />
+        </div>
 
         <div class="panel-bottom">
             <grid-work
@@ -15,8 +17,9 @@
             >
                 <talent-bio
                     :text="bio.text"
-                    :excerpt="bio.excerpt"
-                    :image="bio.image"
+                    :abstract="bio.abstract"
+                    :image="bio.imageSecondary"
+                    :socials="bio.socials"
                 />
             </grid-work>
         </div>
@@ -43,13 +46,12 @@ export default {
     data() {
         return {
             scrollOpacity: 1,
-            titleHeight: 0,
-            bottomInView: false
+            titleHeight: 0
         }
     },
     computed: {
         classes() {
-            return ["page-reel", { "bottom-in-view": this.bottomInView }]
+            return ["page-reel"]
         },
         bio() {
             return {
@@ -57,7 +59,9 @@ export default {
                 image: this.page?.featuredImage?.node || {},
                 imageSecondary:
                     this.page?.secondaryFeaturedImage?.secondaryFeaturedImage ||
-                    {}
+                    {},
+                abstract: this.page?.talentMeta?.abstract || "",
+                socials: this.page?.talentMeta?.contactInfo || []
             }
         },
         gridItems() {
@@ -73,6 +77,7 @@ export default {
                         {},
                     tags: obj?.tags?.nodes || [],
                     type: obj?.workMeta?.type || "",
+                    text: obj?.workMeta?.excerpt || "",
                     link: obj?.workMeta?.link || "",
                     publication: obj?.workMeta?.publication || "",
                     talent: obj?.workMeta?.talentName || ""
@@ -85,8 +90,8 @@ export default {
             const scrollTop = this.$store.state.sTop
             console.log("")
             let opacity = _clamp(1 - scrollTop / titleheight, 0.2, 1)
-            // Fade out fully if at bottom
-            if (scrollTop >= this.$store.state.winHeight) {
+            // Fade out fully when scrolled 25vh
+            if (scrollTop >= this.$store.state.winHeight / 4) {
                 opacity = 0
             }
             return opacity
@@ -120,24 +125,34 @@ export default {
     min-height: var(--unit-100vh);
     $bgColor: var(--theme-color-background);
 
+    .panel-top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(var(--unit-100vh) / 2);
+        min-height: 300px;
+        z-index: 100;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
     .title {
         display: block;
-        font-size: 175px;
+        // font-size: 175px;
+        font-size: 150px; // updated w/ dave
         line-height: 1;
 
-        position: fixed;
-        left: 50%;
-        top: 100px;
-        z-index: 10;
-        transform: translate(-50%, 0);
-
-        // margin: 230px auto 100px auto;
         text-align: center;
         white-space: break-spaces;
         display: flex;
         flex-direction: column;
-
+        transition: opacity 0.6s var(--easing-authentic-motion);
         ::v-deep .word {
+            line-height: 1;
             &:nth-of-type(n) {
                 font-style: normal;
                 text-transform: inherit;
@@ -148,36 +163,32 @@ export default {
             }
         }
     }
-    // TODO: Remove and get
-    // .spacer {
-    //     height: 100px;
-    //     width: 100%;
-    //     background-image: linear-gradient(
-    //         0deg,
-    //         rgba(255, 255, 255, 1) 50%,
-    //         rgba(255, 255, 255, 0) 100%
-    //     );
-    //     transition: background-color 0.8s var(--easing-authentic-motion);
-    // }
-
-    // .theme-gray & .spacer {
-    //     background: linear-gradient(
-    //         0deg,
-    //         rgba(203, 203, 203, 1) 50%,
-    //         rgba(203, 203, 203, 0) 100%
-    //     );
-    // }
+    // TODO: Remove
+    /*
+    .spacer {
+        height: 100px;
+        width: 100%;
+        background-image: linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        transition: background-color 0.8s var(--easing-authentic-motion);
+    }
+    .theme-gray & .spacer {
+        background: linear-gradient(
+            0deg,
+            rgba(203, 203, 203, 1) 50%,
+            rgba(203, 203, 203, 0) 100%
+        );
+    }
+    */
 
     .panel-bottom {
         position: relative;
         z-index: 100;
-
-        margin-top: 400px;
+        margin-top: calc(var(--unit-100vh) / 2);
     }
-    // .grid {
-    //     background-color: var(--theme-color-background);
-    //     transition: background-color 0.8s var(--easing-authentic-motion);
-    // }
 
     // Hover states
     @media #{$has-hover} {
@@ -189,11 +200,13 @@ export default {
         .title {
             font-size: 125px;
         }
+        .panel-top {
+            min-height: 150px;
+        }
     }
     @media #{$lt-phone} {
         .title {
             font-size: 65px;
-            margin: 210px auto 85px auto;
         }
     }
 }

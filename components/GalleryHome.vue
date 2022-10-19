@@ -56,7 +56,9 @@ export default {
     height: 100%;
     transform: translate(100%, 0);
     z-index: 100;
-    transition: all 1s var(--easing-authentic-motion);
+
+    transition: background-color 0.8s var(--easing-authentic-motion),
+        transform 1s var(--easing-authentic-motion);
 
     display: flex;
     flex-direction: row;

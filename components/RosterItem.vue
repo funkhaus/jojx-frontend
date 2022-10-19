@@ -27,7 +27,10 @@ export default {
 
     computed: {
         classes() {
-            return ["roster-item"]
+            return [
+                "roster-item",
+                { "is-one-word": this.parsedText?.length == 1 }
+            ]
         },
         parsedText() {
             let split = this.text.split(" ")
@@ -66,6 +69,12 @@ export default {
 
         &:last-of-type {
             padding-right: 0;
+        }
+    }
+    &.is-one-word {
+        .word:nth-of-type(1) {
+            font-style: normal;
+            text-transform: uppercase;
         }
     }
 

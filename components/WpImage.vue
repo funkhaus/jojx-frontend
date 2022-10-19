@@ -1,5 +1,6 @@
 <template>
     <figure :class="classes">
+        <slot />
         <img
             v-if="parsedSrc && !disabled"
             ref="img"
@@ -48,7 +49,7 @@
             v-html="parsedCaption"
         />
 
-        <slot />
+        <slot name="bottom" />
     </figure>
 </template>
 
@@ -315,7 +316,11 @@ export default {
                 )
             }
             if (this.parsedSrc) {
-                Vue.set(this.loadedStatus, "image", this.$refs.img?.complete || false)
+                Vue.set(
+                    this.loadedStatus,
+                    "image",
+                    this.$refs.img?.complete || false
+                )
             }
             // Set the booted flag
             Vue.set(this.loadedStatus, "booted", true)

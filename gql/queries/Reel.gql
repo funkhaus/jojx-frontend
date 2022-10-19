@@ -17,13 +17,21 @@ query Reel($uri: String!) {
                     ...MediaImage
                 }
             }
-
+            talentMeta {
+                abstract
+                contactInfo {
+                    platform: title
+                    to: link
+                    title: linkText
+                }
+            }
             children(first: 99) {
                 nodes {
                     ... on Page {
                         id
                         title
                         to: uri
+                        excerpt
                         secondaryFeaturedImage {
                             secondaryFeaturedImage {
                                 ...MediaImage

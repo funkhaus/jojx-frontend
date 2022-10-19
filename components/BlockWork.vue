@@ -5,65 +5,68 @@
         :to="linkTo"
         :class="classes"
     >
-        <wp-image
-            v-if="image"
-            class="image primary"
-            :image="image"
-            object-fit="cover"
-        >
-            <h3
-                v-if="category"
-                class="category"
-                v-html="category"
-            />
-        </wp-image>
-
-        <wp-image
-            v-if="imageSecondary"
-            v-prlx="{ fromBottom: true }"
-            :image="imageSecondary"
-            class="image secondary"
-        />
-
-        <div class="panel-text">
-            <div class="panel-title">
-                <h2
-                    v-if="title"
-                    class="title"
-                    v-html="title"
-                />
+        <div class="background">
+            <wp-image
+                v-if="image"
+                class="image primary"
+                :image="image"
+                object-fit="cover"
+            >
                 <h3
-                    v-if="talent"
-                    class="talent"
-                    v-html="`by ${talent}`"
+                    v-if="category"
+                    class="category"
+                    v-html="category"
                 />
-            </div>
+                <template #bottom>
+                    <div class="panel-title">
+                        <h2
+                            v-if="title"
+                            class="title"
+                            v-html="title"
+                        />
+                        <h3
+                            v-if="talent"
+                            class="talent"
+                            v-html="`by ${talent}`"
+                        />
+                    </div>
+                </template>
+            </wp-image>
 
-            <div
-                v-if="text"
-                class="mask"
-            >
+            <wp-image
+                v-if="imageSecondary"
+                v-prlx="{ fromBottom: true }"
+                :image="imageSecondary"
+                class="image secondary"
+            />
+
+            <div class="panel-text">
                 <div
-                    class="text"
-                    v-html="text"
-                />
-            </div>
+                    v-if="text"
+                    class="mask"
+                >
+                    <div
+                        class="text"
+                        v-html="text"
+                    />
+                </div>
 
-            <div
-                v-if="publication"
-                class="mask"
-            >
-                <div class="panel-publication">
-                    <span
-                        class="cta"
-                        v-text="'Read @'"
-                    />
-                    <span
-                        class="publication"
-                        v-text="publication"
-                    />
-                    <!-- TODO: get correct arrow from design -->
-                    <svg-arrow-right class="svg" />
+                <div
+                    v-if="publication"
+                    class="mask"
+                >
+                    <div class="panel-publication">
+                        <span
+                            class="cta"
+                            v-text="'Read @'"
+                        />
+                        <span
+                            class="publication"
+                            v-text="publication"
+                        />
+                        <!-- TODO: get correct arrow from design -->
+                        <svg-arrow-right class="svg" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,11 +159,17 @@ export default {
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
-    box-sizing: border-box;
-    padding: 40px;
+
     position: relative;
     width: 50%;
     margin: 100px auto;
+    .background {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 40px;
+        background-color: var(--theme-color-background);
+        transition: background-color 0.8s var(--easing-authentic-motion);
+    }
 
     .image {
         &.secondary {
@@ -170,10 +179,9 @@ export default {
 
     .panel-text {
         position: relative;
-        z-index: 999;
+        z-index: 100;
         max-width: 515px;
-        transform: translate(0, -50%);
-        padding: 40px;
+        padding: 40px 0;
         box-sizing: border-box;
 
         color: var(--theme-color-text);
@@ -193,18 +201,23 @@ export default {
     }
 
     .panel-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
         z-index: 100;
-        //mix-blend-mode: difference; // TODO: why isnt it blending with bg
+        width: 100%;
+        transform: translate(0%, 30%);
+        color: var(--theme-color-background);
+        mix-blend-mode: difference;
+        // TODO: why isnt it blending with bg
     }
     .title {
-        // color: var(--theme-color-background);
         font-size: 64px;
         margin-bottom: 8px;
         transform: translate(0, 100%);
     }
 
     .talent {
-        // color: var(--theme-color-background);
         font-size: 34px;
         font-style: italic;
         margin-bottom: 25px;
@@ -276,7 +289,7 @@ export default {
             position: absolute;
             top: 0;
             right: var(--unit-gap);
-            z-index: 100;
+            z-index: 20;
             max-width: 40%;
             transform: translate(0, 25%);
         }
@@ -287,15 +300,16 @@ export default {
     }
 
     &:nth-of-type(odd) {
-        .panel-text .panel-title {
+        .panel-title {
             text-align: right;
         }
         .category {
             left: unset;
             right: 0;
             top: 50%;
+            // opacity: 1;
             transform-origin: right;
-            transform: rotate(-90deg) translate(-100%, 100%);
+            transform: rotate(-90deg) translate(-100%, -100%);
         }
     }
 
@@ -304,6 +318,9 @@ export default {
             .category {
                 opacity: 1;
                 transform: rotate(-90deg) translate(-100%, -100%);
+            }
+            &:nth-of-type(odd) .category {
+                transform: rotate(-90deg) translate(-100%, 100%);
             }
             .title,
             .talent,
@@ -319,9 +336,11 @@ export default {
     }
     // Breakpoints
     @media #{$lt-tablet} {
-        width: 100%;
-        padding: 0;
         margin-bottom: 60px;
+        width: 100%;
+        .background {
+            padding: 0;
+        }
         .title,
         .talent,
         .category,
