@@ -196,6 +196,9 @@ export default {
                     this.$store.commit("SET_BREAKPOINT", newVal)
                 }
             }
+        },
+        $route(newVal, oldVal) {
+            this.$store.commit("SET_MENU", false)
         }
     },
     mounted() {

@@ -1,5 +1,6 @@
 <template>
     <figure :class="classes">
+        <slot name="top" />
         <slot />
         <img
             v-if="parsedSrc && !disabled"

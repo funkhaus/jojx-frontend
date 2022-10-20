@@ -18,7 +18,7 @@
                     v-html="category"
                 />
                 <template #bottom>
-                    <div class="panel-title">
+                    <div class="panel-title desktop">
                         <h2
                             v-if="title"
                             class="title"
@@ -41,6 +41,22 @@
             />
 
             <div class="panel-text">
+                <div
+                    v-if="title || talent"
+                    class="panel-title mobile"
+                >
+                    <h2
+                        v-if="title"
+                        class="title"
+                        v-html="title"
+                    />
+                    <h3
+                        v-if="talent"
+                        class="talent"
+                        v-html="`by ${talent}`"
+                    />
+                </div>
+
                 <div
                     v-if="text"
                     class="mask"
@@ -173,6 +189,7 @@ export default {
     }
 
     .image {
+        position: relative;
         &.secondary {
             display: none;
         }
@@ -182,9 +199,8 @@ export default {
         position: relative;
         z-index: 100;
         max-width: 515px;
-        padding: 40px 0;
-        box-sizing: border-box;
-
+        // padding: 40px 0;
+        // box-sizing: border-box;
         color: var(--theme-color-text);
     }
 
@@ -207,7 +223,9 @@ export default {
         left: 0;
         z-index: 100;
         width: 100%;
-        transform: translate(0%, 30%);
+        max-width: 700px;
+        margin-right: auto;
+        transform: translate(-2%, 30%);
         color: var(--theme-color-background);
         mix-blend-mode: difference;
     }
@@ -220,7 +238,7 @@ export default {
     .talent {
         font-size: 34px;
         font-style: italic;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         transform: translate(0, 150%);
     }
 
@@ -232,6 +250,8 @@ export default {
         font-size: 18px;
         opacity: 1;
         transform: translate(0%, 150%);
+
+        margin: 40px 0;
 
         ::v-deep p {
             font-size: 18px;
@@ -250,7 +270,7 @@ export default {
         left: 0;
         top: 50%;
         transform-origin: left;
-        transform: rotate(-90deg) translate(-100%, 100%);
+        transform: rotate(-90deg) translate(-50%, 100%);
     }
 
     .panel-publication {
@@ -294,14 +314,27 @@ export default {
             transform: translate(0, 25%);
         }
     }
-
+    &.type-half-width {
+        .background {
+            padding: 150px 90px 50px 90px;
+        }
+        box-sizing: border-box;
+        &:nth-of-type(even) {
+            .background {
+                padding: 100px 80px 175px 100px;
+            }
+        }
+    }
     &.type-full-width {
         width: 100%;
     }
 
-    &:nth-of-type(odd) {
+    &:nth-of-type(even) {
         .panel-title {
             text-align: right;
+            transform: translate(2%, 30%);
+            margin-right: unset;
+            margin-left: auto;
         }
         .category {
             left: unset;
@@ -309,18 +342,22 @@ export default {
             top: 50%;
             // opacity: 1;
             transform-origin: right;
-            transform: rotate(-90deg) translate(-100%, -100%);
+            transform: rotate(-90deg) translate(50%, -100%);
         }
+    }
+
+    .mobile {
+        display: none;
     }
 
     @media #{$has-hover} {
         &:hover {
             .category {
                 opacity: 1;
-                transform: rotate(-90deg) translate(-100%, -100%);
+                transform: rotate(-90deg) translate(-50%, -100%);
             }
-            &:nth-of-type(odd) .category {
-                transform: rotate(-90deg) translate(-100%, 100%);
+            &:nth-of-type(even) .category {
+                transform: rotate(-90deg) translate(50%, 100%);
             }
             .title,
             .talent,
@@ -336,7 +373,7 @@ export default {
     }
     // Breakpoints
     @media #{$lt-tablet} {
-        margin-bottom: 60px;
+        margin: 20px auto;
         width: 100%;
         .background {
             padding: 0;
@@ -358,6 +395,7 @@ export default {
         }
         .text {
             font-size: 16px;
+            margin: 0 0 var(--unit-gap) 0;
             ::v-deep p {
                 font-size: 16px;
             }
@@ -373,6 +411,17 @@ export default {
             padding: var(--unit-gap);
             color: var(--color-white);
             transform: rotate(0) translate(0);
+        }
+
+        .panel-title {
+            position: static;
+
+            color: var(--color-black);
+            max-width: 100%;
+            margin-right: unset;
+            transform: translate(0);
+
+            mix-blend-mode: unset;
         }
 
         // Hovers
@@ -404,18 +453,27 @@ export default {
                 transform: translate(0, 50%);
             }
         }
-        &:nth-of-type(odd) {
-            .panel-text {
-                .panel-title {
-                    text-align: left;
-                    // margin-left: unset;
-                }
+        &:nth-of-type(n) {
+            .panel-title {
+                transform: translate(0);
+                text-align: left;
             }
+        }
+
+        &.type-half-width:nth-of-type(n) .background {
+            padding: 0px;
+        }
+
+        .mobile {
+            display: block;
+        }
+        .desktop {
+            display: none;
         }
     }
 
     @media #{$lt-phone} {
-        margin-bottom: 20px;
+        margin: 20px auto;
     }
 }
 </style>

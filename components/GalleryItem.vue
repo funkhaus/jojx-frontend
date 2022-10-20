@@ -96,13 +96,12 @@ export default {
 <style lang="scss" scoped>
 .gallery-item {
     min-width: 500px; // DELETE
-    width: 100%;
-    box-sizing: border-box;
     padding: 20px;
+    box-sizing: border-box;
     transition: transform 1s linear, opacity 0.1s var(--easing-authentic-motion);
-
     // Breakpoints
     @media #{$lt-phone} {
+        min-width: 250px; // DELETE
     }
 }
 </style>
