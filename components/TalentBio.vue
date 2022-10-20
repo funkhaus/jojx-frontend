@@ -81,7 +81,6 @@ export default {
     },
     methods: {
         onIntersected(event) {
-            console.log("onIntersected", event.detail.isIntersecting)
             if (event.detail.isIntersecting) {
                 this.$store.commit("SET_THEME", "gray")
             } else {
@@ -113,7 +112,8 @@ export default {
         top: 0;
         left: 0;
         z-index: 20;
-        transform: translate(-50%, -75%);
+        opacity: 0;
+        transform: translate(-100%, -75%);
         width: 100%;
         min-width: 600px;
         max-width: 600px;
@@ -123,6 +123,8 @@ export default {
         font-size: 34px;
         font-weight: 300;
         color: var(--color-black);
+        transition: transform 0.6s var(--easing-authentic-motion),
+            opacity 0.6s var(--easing-authentic-motion);
         ::v-deep * {
             font-size: 30px;
             &:first-of-type {
@@ -174,6 +176,34 @@ export default {
         }
     }
 
+    .text,
+    .image,
+    .socials {
+        opacity: 0;
+        transform: translate(-100%, 0%);
+        transition: transform 0.6s var(--easing-authentic-motion),
+            opacity 0.6s var(--easing-authentic-motion);
+    }
+    .image {
+        transform: translate(0, 100%);
+    }
+    .text {
+        transform: translate(100%, 0);
+    }
+
+    &.has-intersected {
+        .text,
+        .image,
+        .socials {
+            opacity: 1;
+            transform: translate(0%);
+        }
+        .abstract {
+            opacity: 1;
+            transform: translate(-50%, -75%);
+        }
+    }
+
     .mobile {
         display: none;
     }
@@ -207,6 +237,9 @@ export default {
         padding: 0 var(--unit-gap);
         box-sizing: border-box;
 
+        .column {
+            overflow: hidden;
+        }
         .column.social,
         .column.image-content,
         .column.text-content {
@@ -222,16 +255,24 @@ export default {
         .socials {
             margin-left: unset;
             margin-right: auto;
+            margin-bottom: 0;
+            .item:last-of-type {
+                margin-bottom: 0;
+            }
         }
 
         .abstract {
             position: static;
-            // top: 0;
-            // left: 0;
-            transform: translate(0);
+            opacity: 0;
+            transform: translate(-100%, 0);
             width: 100%;
             min-width: 100%;
             padding: 40px 0;
+        }
+
+        &.has-intersected .abstract {
+            opacity: 1;
+            transform: translate(0);
         }
 
         .text {

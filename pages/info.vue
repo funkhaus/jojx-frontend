@@ -71,5 +71,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-self: center;
+    overflow: hidden;
+
+    margin-bottom: 60px;
 }
 </style>

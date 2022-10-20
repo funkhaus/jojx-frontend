@@ -77,7 +77,7 @@ export default {
                         {},
                     tags: obj?.tags?.nodes || [],
                     type: obj?.workMeta?.type || "",
-                    text: obj?.workMeta?.excerpt || "",
+                    text: obj?.excerpt || "",
                     link: obj?.workMeta?.link || "",
                     publication: obj?.workMeta?.publication || "",
                     talent: obj?.workMeta?.talentName || ""
@@ -123,7 +123,6 @@ export default {
     color: var(--color-black);
     margin: 0 auto;
     min-height: var(--unit-100vh);
-    $bgColor: var(--theme-color-background);
 
     .panel-top {
         position: fixed;
@@ -142,15 +141,16 @@ export default {
 
     .title {
         display: block;
-        // font-size: 175px;
         font-size: 150px; // updated w/ dave
         line-height: 1;
+        box-align: border-box;
 
         text-align: center;
         white-space: break-spaces;
+        word-break: break-word;
         display: flex;
         flex-direction: column;
-        transition: opacity 0.6s var(--easing-authentic-motion);
+        transition: opacity 0.25s var(--easing-authentic-motion);
         ::v-deep .word {
             line-height: 1;
             &:nth-of-type(n) {
@@ -207,6 +207,7 @@ export default {
     @media #{$lt-phone} {
         .title {
             font-size: 65px;
+            padding: 0 var(--unit-gap);
         }
     }
 }

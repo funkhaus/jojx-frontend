@@ -52,6 +52,7 @@ export default {
     color: inherit;
     font-size: inherit;
     transition: all 0.4s var(--easing-authentic-motion);
+    white-space: break-spaces;
 
     .word {
         overflow: hidden;

@@ -80,6 +80,12 @@ export default {
         .route-index .is-scrolled & {
             transform: scale(0.15);
         }
+
+        .route-directors &,
+        .route-studio & {
+            opacity: 0;
+            pointer-events: none;
+        }
     }
 }
 </style>

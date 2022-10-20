@@ -40,7 +40,10 @@
                 class="image secondary"
             />
 
-            <div class="panel-text">
+            <div
+                v-intersection-observer
+                class="panel-text"
+            >
                 <div
                     v-if="title || talent"
                     class="panel-title mobile"
@@ -239,7 +242,9 @@ export default {
         font-size: 34px;
         font-style: italic;
         margin-bottom: 20px;
-        transform: translate(0, 150%);
+        transform: translate(0, 200%);
+        transition: transform 0.4s var(--easing-authentic-motion),
+            opacity 0.4s var(--easing-authentic-motion);
     }
 
     .mask {
@@ -249,7 +254,7 @@ export default {
     .text {
         font-size: 18px;
         opacity: 1;
-        transform: translate(0%, 150%);
+        transform: translate(0%, 200%);
 
         margin: 40px 0;
 
@@ -387,6 +392,23 @@ export default {
             opacity: 1;
             transform: translate(0);
         }
+
+        .title,
+        .talent,
+        .text {
+            opacity: 0;
+            transform: translate(0, 100%);
+        }
+
+        .panel-text.has-intersected {
+            .title,
+            .talent,
+            .text {
+                opacity: 1;
+                transform: translate(0);
+            }
+        }
+
         .title {
             font-size: 34px;
         }

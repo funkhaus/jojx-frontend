@@ -1,5 +1,8 @@
 <template lang="html">
-    <div class="block-rep">
+    <div
+        v-intersection-observer.stagger
+        class="block-rep"
+    >
         <effect-text-hover
             :to="`mailto:${email}`"
             class="name"
@@ -43,17 +46,37 @@ export default {
 <style lang="scss" scoped>
 .block-rep {
     width: 50%;
+    overflow: hidden;
+
     a {
         display: block;
     }
+
+    .name,
+    .telephone,
+    .position {
+        transform: translate(0%, 100%);
+        opacity: 0;
+        transition: transform 0.6s var(--easing-authentic-motion),
+            opacity 0.6s var(--easing-authentic-motion);
+    }
+
     .name {
         font-size: 22px;
     }
     .position,
     .telephone {
-        margin-top: 10px;
-
+        margin-top: 6px;
         font-size: 14px;
+    }
+
+    &.has-intersected {
+        .name,
+        .telephone,
+        .position {
+            opacity: 1;
+            transform: translate(0);
+        }
     }
 
     // Breakpoints

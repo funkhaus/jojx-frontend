@@ -77,8 +77,10 @@ export default {
 
         opacity: 0;
         transform: translate(-100%, -50%);
+        clip-path: inset(0% 100% 0% 0);
         transition: opacity 0.4s var(--easing-authentic-motion),
-            transform 0.4s var(--easing-authentic-motion);
+            transform 0.4s var(--easing-authentic-motion),
+            clip-path 0.6s var(--easing-authentic-motion);
     }
 
     .list-item:nth-of-type(even) {
@@ -88,6 +90,7 @@ export default {
         }
         ::v-deep .image {
             transform: translate(100%, -50%);
+            clip-path: inset(0 0 0 100%);
         }
     }
 
@@ -101,6 +104,7 @@ export default {
                 z-index: 10;
                 opacity: 1;
                 transform: translate(-25%, -50%);
+                clip-path: inset(0%);
             }
         }
     }
@@ -115,6 +119,7 @@ export default {
 
     @media #{$lt-tablet} {
         width: 100%;
+        margin: 60px 0;
 
         .list-item:nth-of-type(n) .link {
             text-align: left;

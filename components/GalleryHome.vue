@@ -57,6 +57,13 @@ export default {
     transition: background-color 0.8s var(--easing-authentic-motion),
         transform 1.25s var(--easing-authentic-motion);
 
+    // Hide scrollbars
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
+
     &.intro-is-complete {
         transform: translate(0, 0);
     }

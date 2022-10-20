@@ -1,5 +1,8 @@
 <template lang="html">
-    <div class="contact-region">
+    <div
+        v-intersection-observer
+        class="contact-region"
+    >
         <h2
             class="title"
             v-html="title"
@@ -85,6 +88,21 @@ export default {
     box-sizing: border-box;
     color: var(--color-black);
 
+    .title,
+    .address,
+    .email,
+    .phone,
+    .image,
+    .social-links {
+        transform: translate(-100%, 0);
+        opacity: 0;
+        transition: transform 0.6s var(--easing-authentic-motion),
+            opacity 0.6s var(--easing-authentic-motion);
+    }
+    .image {
+        transform: translate(100%, 0);
+    }
+
     .title {
         margin: 0 0 30px;
         max-width: 620px;
@@ -96,6 +114,8 @@ export default {
 
         ::v-deep p {
             margin: 0;
+            font-size: 50px;
+            font-weight: 300;
         }
     }
     .panel-content {
@@ -117,12 +137,18 @@ export default {
     }
     .address {
         line-height: 1.3;
+        transition-delay: 0.25s;
     }
     .email {
-        margin: 35px 0 10px;
+        margin: 25px 0 10px;
+        transition-delay: 0.3s;
     }
     .phone {
-        margin: 0 0 30px;
+        margin: 0 0 25px;
+        transition-delay: 0.35s;
+    }
+    .social-links {
+        transition-delay: 0.4s;
     }
     .social-link {
         margin: 5px 0;
@@ -142,6 +168,18 @@ export default {
         height: 100%;
     }
 
+    &.has-intersected {
+        .title,
+        .address,
+        .email,
+        .phone,
+        .image,
+        .social-links {
+            opacity: 1;
+            transform: translate(0);
+        }
+    }
+
     // Breakpoints
     @media #{$gt-cinema} {
         padding: 0 190px;
@@ -157,6 +195,13 @@ export default {
     @media #{$lt-phone} {
         padding: 0 20px;
         margin: 110px 0 35px;
+
+        .address,
+        .email,
+        .phone,
+        .social-links {
+            transform: translate(100%, 0);
+        }
 
         .title {
             padding: 0 20px;

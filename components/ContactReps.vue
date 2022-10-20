@@ -1,5 +1,8 @@
 <template lang="html">
-    <div class="contact-reps">
+    <div
+        v-intersection-observer
+        class="contact-reps"
+    >
         <h2 class="section-title">
             Representation
         </h2>
@@ -49,6 +52,13 @@ export default {
         font-style: italic;
         font-weight: 300;
     }
+    .section-title,
+    .location {
+        transform: translate(0%, 100%);
+        opacity: 0;
+        transition: transform 0.6s var(--easing-authentic-motion),
+            opacity 0.6s var(--easing-authentic-motion);
+    }
     .reps {
         max-width: 700px;
 
@@ -58,6 +68,14 @@ export default {
     }
     .rep {
         margin: 25px 0;
+    }
+
+    &.has-intersected {
+        .section-title,
+        .location {
+            transform: translate(0%);
+            opacity: 1;
+        }
     }
 
     // Breakpoints

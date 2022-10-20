@@ -1,5 +1,8 @@
 <template lang="html">
-    <div class="contact-team">
+    <div
+        v-intersection-observer
+        class="contact-team"
+    >
         <h3 class="section-title">
             Team
         </h3>
@@ -32,7 +35,12 @@ export default {
     .section-title {
         margin: 85px 0 20px;
         font-size: 34px;
+        font-weight: 300;
         font-style: italic;
+        transform: translate(0%, 100%);
+        opacity: 0;
+        transition: transform 0.6s var(--easing-authentic-motion),
+            opacity 0.6s var(--easing-authentic-motion);
     }
 
     .reps {
@@ -43,7 +51,14 @@ export default {
         max-width: 700px;
     }
     .rep {
-        margin: 0 0 55px;
+        margin: 0 0 50px;
+    }
+
+    &.has-intersected {
+        .section-title {
+            transform: translate(0%);
+            opacity: 1;
+        }
     }
 
     // Breakpoints
