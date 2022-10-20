@@ -31,7 +31,6 @@
             v-html="item.label"
         />
 
-        <!-- TODO Make prop for sub-menus to be drop downs -->
         <ul
             v-if="hasSubMenu"
             class="sub-menu"

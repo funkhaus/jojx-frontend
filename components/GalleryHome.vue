@@ -1,20 +1,12 @@
 <template>
     <div :class="classes">
-        <!-- TODO: animate blocks -->
-        <div
-            v-for="item in items"
+        <gallery-item
+            v-for="(item, i) in items"
             :key="item.id"
-            class="item"
-        >
-            <wp-image
-                :key="item.id"
-                class="image"
-                :image="item.image"
-                object-fit="contain"
-            />
-        </div>
-
-        <div class="anchor" />
+            :image="item.image"
+            :to="item.to"
+            :index="i"
+        />
     </div>
 </template>
 
@@ -37,48 +29,33 @@ export default {
                 { "intro-is-complete": this.introIsComplete }
             ]
         }
-    },
-    methods: {}
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 .gallery-home {
-    width: 500vw; //DELETE
-    background-color: var(--theme-color-background);
-    overflow: auto;
-    white-space: nowrap;
-
+    width: 100%;
+    height: var(--unit-100vh);
     position: absolute;
     top: 0;
     left: 0;
-
-    height: 100%;
     transform: translate(100%, 0);
     z-index: 100;
+    background-color: var(--theme-color-background);
+    // overflow: scroll;
 
-    transition: background-color 0.8s var(--easing-authentic-motion),
-        transform 1s var(--easing-authentic-motion);
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 200px;
+    box-sizing: border-box;
 
     display: flex;
     flex-direction: row;
     align-items: center;
-    flex-wrap: wrap;
 
-    .item {
-        max-width: 500px; // DELETE
-        box-sizing: border-box;
-        padding: 20px;
-        width: 100%;
-    }
-
-    .anchor {
-        position: absolute;
-        right: 0;
-        height: 100%;
-        width: 100px;
-        background-color: blue; // DELETE
-    }
+    transition: background-color 0.8s var(--easing-authentic-motion),
+        transform 1.25s var(--easing-authentic-motion);
 
     &.intro-is-complete {
         transform: translate(0, 0);
@@ -86,6 +63,7 @@ export default {
 
     // Breakpoints
     @media #{$lt-phone} {
+        height: 100vh;
     }
 }
 </style>

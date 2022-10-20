@@ -195,7 +195,6 @@ export default {
                     break
 
                 case this.isIframe:
-                    // TODO get src attribute from iframe, and return it here
                     break
             }
 

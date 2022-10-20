@@ -11,7 +11,7 @@ export const state = () => ({
     winWidth: 0,
     referrer: false,
     theme: "",
-    introIsActive: false
+    introIsActive: true
 })
 
 // Define mutations

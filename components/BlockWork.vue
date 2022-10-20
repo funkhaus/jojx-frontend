@@ -66,6 +66,7 @@
                         />
                         <!-- TODO: get correct arrow from design -->
                         <svg-arrow-right class="svg" />
+                        <!-- <span v-html="'&#8594'"/> -->
                     </div>
                 </div>
             </div>
@@ -209,7 +210,6 @@ export default {
         transform: translate(0%, 30%);
         color: var(--theme-color-background);
         mix-blend-mode: difference;
-        // TODO: why isnt it blending with bg
     }
     .title {
         font-size: 64px;

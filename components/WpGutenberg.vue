@@ -23,7 +23,6 @@ function getBlockName(name = "") {
 
 export default {
     components: {
-        // TODO Is it possible to lazy load the entire ~/components/gutenberg directory?
         GutenbergHeading: () => import("~/components/gutenberg/Heading"),
         GutenbergParagraph: () => import("~/components/gutenberg/Paragraph"),
         GutenbergImage: () => import("~/components/gutenberg/Image"),
@@ -157,7 +156,7 @@ export default {
     // Specific block styling below.
     .gutenberg-heading {
         line-height: 1.2;
-        
+
         // Align
         &.align-center {
             max-width: var(--unit-max-width-medium);
@@ -191,7 +190,7 @@ export default {
             &.is-h4 {
                 font-size: 18px;
             }
-        }        
+        }
     }
     .gutenberg-paragraph {
         line-height: 1.4;

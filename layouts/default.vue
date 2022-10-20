@@ -198,6 +198,11 @@ export default {
             }
         }
     },
+    mounted() {
+        if (!this.$store.state.referrer && this.$route.name !== "index") {
+            this.$store.commit("SET_INTRO", false)
+        }
+    },
     methods: {
         toggleMenu(bool) {
             this.$store.commit("SET_MENU", bool)
