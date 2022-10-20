@@ -63,6 +63,7 @@ export default {
         .menu-item {
             font-size: 26px;
             padding: 12px 0;
+            line-height: 1;
             color: var(--color-white);
         }
     }

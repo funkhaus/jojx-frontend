@@ -49,10 +49,10 @@ export default {
         background-color: var(--theme-color-nav);
 
         &:first-of-type {
-            margin: 0 0 6px 0;
+            margin: 0 0 2px 0;
         }
         &:last-of-type {
-            margin: 6px 0 0 0;
+            margin: 2px 0 0 0;
         }
     }
     .line-1,
@@ -70,7 +70,7 @@ export default {
         }
         .line-2 {
             rotate: -45deg;
-            translate: 0 -4.5px;
+            translate: 0 -1px;
         }
     }
 

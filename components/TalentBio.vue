@@ -101,6 +101,7 @@ export default {
 
     width: 100%;
     min-height: var(--unit-100vh);
+    margin: 100px auto 0 auto;
 
     .column {
         position: relative;
@@ -236,6 +237,7 @@ export default {
     @media #{$lt-phone} {
         padding: 0 var(--unit-gap);
         box-sizing: border-box;
+        margin: 40px auto 100px auto;
 
         .column {
             overflow: hidden;

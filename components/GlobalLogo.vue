@@ -33,7 +33,7 @@ export default {
 .global-logo {
     position: fixed;
     z-index: 700;
-    bottom: 30px;
+    bottom: 35px;
     left: var(--unit-gap);
     mix-blend-mode: difference;
     transform-origin: bottom left;
@@ -75,6 +75,7 @@ export default {
         }
     }
     @media #{$lt-phone} {
+        bottom: 16px;
         transform: scale(0.15); // 112 / 716 = .15
 
         .route-index .is-scrolled & {

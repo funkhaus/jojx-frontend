@@ -226,9 +226,9 @@ export default {
         left: 0;
         z-index: 100;
         width: 100%;
-        max-width: 700px;
+        max-width: 550px;
         margin-right: auto;
-        transform: translate(-2%, 30%);
+        transform: translate(-5%, 35%);
         color: var(--theme-color-background);
         mix-blend-mode: difference;
     }
@@ -257,6 +257,8 @@ export default {
         transform: translate(0%, 200%);
 
         margin: 40px 0;
+        transition: transform 0.7s var(--easing-authentic-motion),
+            opacity 0.7s var(--easing-authentic-motion);
 
         ::v-deep p {
             font-size: 18px;
@@ -337,7 +339,7 @@ export default {
     &:nth-of-type(even) {
         .panel-title {
             text-align: right;
-            transform: translate(2%, 30%);
+            transform: translate(5%, 35%);
             margin-right: unset;
             margin-left: auto;
         }

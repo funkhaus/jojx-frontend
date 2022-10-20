@@ -67,6 +67,7 @@ export default {
         { src: "~/plugins/preview.client.js", mode: "client" },
         { src: "~/plugins/performant-events.client.js", mode: "client" },
         { src: "~/plugins/web-font-loader.client.js", mode: "client" }
+        // { src: "~/plugins/magic-scroll.client.js", mode: "client" } // TODO: DELETE
         //{ src: "~/plugins/ip-geolocate.js" },
     ],
 

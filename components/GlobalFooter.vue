@@ -27,6 +27,8 @@ export default {
 
 <style lang="scss" scoped>
 .global-footer {
+    position: relative;
+    z-index: 700;
     display: flex;
     flex-direction: row;
     align-items: center;

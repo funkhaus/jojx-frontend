@@ -89,7 +89,7 @@ export default {
             classes.push(`route-${_kebabCase(this.$route.name || "error")}`)
 
             this.$store.state.introIsActive && classes.push("intro-is-active")
-
+            this.$store.state.menuIsOpen && classes.push("menu-is-open")
             // This is how you add a class conditionally
             // this.foo && classes.push("foo")
 
@@ -111,7 +111,7 @@ export default {
                 "layout-default",
                 "main",
                 `breakpoint-${this.breakpoint}`,
-                { "menu-opened": this.$store.state.menuOpened },
+
                 { "is-scrolled": this.$store.state.sTop > 0 },
                 `scrolling-${this.$store.state.scrollDirection}`
             ]
@@ -217,28 +217,28 @@ export default {
 <style lang="scss">
 .layout-default {
     .nav.directors {
-        top: 0;
-        left: var(--unit-gap);
-        transform: rotate(90deg) translate(20%, 0%);
+        top: 25px;
+        left: 45px;
+        transform: rotate(90deg) translate(0%, 0%);
     }
     .nav.studio,
     .nav.back {
-        top: var(--unit-gap);
-        right: var(--unit-gap);
-        transform: rotate(90deg) translate(0%, -150%);
-        transform-origin: center;
+        top: 25px;
+        right: 45px;
+        transform: rotate(90deg) translate(100%, 0%);
+        transform-origin: right;
     }
 
     .nav.info {
-        bottom: var(--unit-gap);
-        right: var(--unit-gap);
-        transform: rotate(90deg) translate(60%, -40%);
+        bottom: 25px;
+        right: 45px;
+        transform: rotate(90deg) translate(0%, 0%);
         transform-origin: right;
     }
     @media #{$lt-phone} {
         .nav.back {
-            top: 80px;
-            right: 40px;
+            top: 60px;
+            right: 25px;
             display: block;
         }
     }

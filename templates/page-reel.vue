@@ -123,6 +123,7 @@ export default {
     color: var(--color-black);
     margin: 0 auto;
     min-height: var(--unit-100vh);
+    overflow: hidden;
 
     .panel-top {
         position: fixed;

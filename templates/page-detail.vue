@@ -9,11 +9,9 @@
             <video-stage
                 :src="parsedPage.videoUrl"
                 class="video-stage"
-                :sync-slot-width="true"
                 :custom-player="true"
                 color="ffffff"
             />
-            <!-- mode="intrinsic-ratio" -->
 
             <div
                 v-intersection-observer.stagger
@@ -64,7 +62,6 @@ export default {
     },
     computed: {
         parsedPage() {
-            // Shape data from WP-GQL to work with template
             return {
                 ...this.page,
                 videoUrl: this.page?.workMeta?.videoUrl || "",
@@ -98,9 +95,10 @@ export default {
 
     .video-stage {
         min-height: 550px;
-
-        height: calc(var(--unit-100vh) - 100px);
+        padding-top: 75px;
+        height: calc(var(--unit-100vh) - 175px);
         width: calc(100% - 180px);
+        box-sizing: border-box;
         margin: 0 auto;
         &.has-loaded {
             opacity: 1;
@@ -109,7 +107,7 @@ export default {
     .titles {
         position: absolute;
         width: 100%;
-        bottom: 20px;
+        bottom: 32px;
         right: 0;
         padding: 0 40px 0 0;
 
@@ -138,7 +136,7 @@ export default {
         font-size: 16px;
         font-weight: 300;
         text-transform: capitalize;
-        padding: 20px;
+        padding: 20px 20px 40px;
         transition: opacity 0.6s var(--easing-authentic-motion);
     }
     .is-scrolled & .cta {
@@ -181,36 +179,41 @@ export default {
         }
     }
     @media #{$lt-phone} {
-        padding: 60px 0 100px 0;
+        padding: 0px 0 100px 0;
         .video-stage {
             width: calc(100% - 40px);
+            padding-top: 60px;
+            height: calc(var(--unit-100vh) - 60px);
             ::v-deep .titles {
                 flex-direction: column;
             }
         }
+
         .talent {
             font-size: 20px;
-            top: 20px;
+            top: 15px;
             left: 20px;
         }
         .title,
         .category {
             font-size: 20px;
         }
-        // TODO: Fix positioning
+
         .titles {
+            bottom: 0px;
             padding-right: 20px;
             transform: translate(0, -200%);
         }
         .category {
             font-size: 17px;
-            margin-top: 5px;
+            margin-top: 2px;
         }
         .cta {
-            bottom: 0;
+            bottom: 0px;
             left: unset;
             right: 0;
-            transform: translate(0, -100%);
+            transform: translate(0);
+            padding-bottom: 20px;
         }
     }
 }
