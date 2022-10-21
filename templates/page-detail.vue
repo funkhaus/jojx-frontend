@@ -1,6 +1,7 @@
 <template>
     <section class="page-detail">
         <roster-item
+            v-if="parsedPage.talent"
             :text="parsedPage.talent"
             class="talent"
         />
@@ -18,6 +19,7 @@
                 class="titles"
             >
                 <h2
+                    v-if="parsedPage.title"
                     class="title"
                     v-text="parsedPage.title"
                 />
@@ -36,6 +38,7 @@
             />
         </div>
         <div
+            v-if="parsedPage.blocks.length"
             ref="bottom"
             class="panel-bottom"
         >
@@ -65,10 +68,8 @@ export default {
             return {
                 ...this.page,
                 videoUrl: this.page?.workMeta?.videoUrl || "",
-                talent:
-                    this.page?.workMeta?.talentName ||
-                    this.page?.parent?.node?.title ||
-                    "",
+                talent: this.page?.workMeta?.talentName || "",
+                // this.page?.parent?.node?.title ||
                 category: "wildcard"
             }
         }

@@ -186,7 +186,9 @@ export default {
     .background {
         width: 100%;
         box-sizing: border-box;
-        padding: 40px;
+
+        padding: 150px 90px 50px 90px;
+
         background-color: var(--theme-color-background);
         transition: background-color 0.8s var(--easing-authentic-motion);
     }
@@ -308,6 +310,7 @@ export default {
     // Block variants
     &.type-featured {
         width: 100%;
+
         .image {
             max-width: 70%;
         }
@@ -347,9 +350,8 @@ export default {
             left: unset;
             right: 0;
             top: 50%;
-            // opacity: 1;
             transform-origin: right;
-            transform: rotate(-90deg) translate(50%, -100%);
+            transform: rotate(90deg) translate(50%, 100%);
         }
     }
 
@@ -364,7 +366,7 @@ export default {
                 transform: rotate(-90deg) translate(-50%, -100%);
             }
             &:nth-of-type(even) .category {
-                transform: rotate(-90deg) translate(50%, 100%);
+                transform: rotate(90deg) translate(50%, -100%);
             }
             .title,
             .talent,
@@ -466,7 +468,6 @@ export default {
             }
         }
         &.type-featured {
-            width: 100%;
             .image {
                 max-width: 100%;
                 min-height: 500px;
