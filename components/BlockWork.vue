@@ -236,6 +236,7 @@ export default {
     }
     .title {
         font-size: 64px;
+        font-weight: 300;
         margin-bottom: 8px;
         transform: translate(0, 100%);
     }
@@ -280,6 +281,7 @@ export default {
         top: 50%;
         transform-origin: left;
         transform: rotate(-90deg) translate(-50%, 100%);
+        font-style: italic;
     }
 
     .panel-publication {

@@ -11,6 +11,7 @@
                 class="image"
                 :image="image"
                 object-fit="contain"
+                background-color="transparent"
             />
         </nuxt-link>
     </client-only>

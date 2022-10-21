@@ -143,6 +143,7 @@ export default {
     .title {
         display: block;
         font-size: 150px; // updated w/ dave
+        font-weight: 300;
         line-height: 1;
         box-align: border-box;
 

@@ -1,5 +1,8 @@
 <template>
-    <ul :class="classes">
+    <ul
+        v-intersection-observer
+        :class="classes"
+    >
         <li
             v-for="(item, i) in items"
             :key="item.title"
@@ -62,9 +65,11 @@ export default {
 
         color: var(--color-white);
         font-size: 26px;
+        font-weight: 300;
         padding: 0 25px;
         text-align: right;
-        transform: translate(-50%, 0);
+        transform: translate(-40%, 0);
+        transition: transform 0.6s var(--easing-authentic-motion);
     }
 
     ::v-deep .image {
@@ -86,24 +91,35 @@ export default {
     .list-item:nth-of-type(even) {
         .link {
             text-align: left;
-            transform: translate(50%, 0);
+            transform: translate(40%, 0);
         }
-        ::v-deep .image {
+        .image {
             transform: translate(100%, -50%);
             clip-path: inset(0 0 0 100%);
+        }
+    }
+
+    &.has-intersected {
+        .link {
+            transform: translate(-50%, 0);
+        }
+        .list-item:nth-of-type(even) .link {
+            text-align: left;
+            transform: translate(50%, 0);
         }
     }
 
     /* Hover State */
     @media #{$has-hover} {
         ::v-deep .list-item:hover {
-            opacity: 1;
-            color: var(--color-white);
-
+            .link {
+                position: relative;
+                z-index: 100;
+            }
             .image {
                 z-index: 10;
                 opacity: 1;
-                transform: translate(-25%, -50%);
+                transform: translate(-50%, -50%);
                 clip-path: inset(0%);
             }
         }
