@@ -228,7 +228,8 @@ export default {
             this.$emit("pause", ...data)
         },
         onEnded(data) {
-            this.$emit("ended", ...data)
+            // this.$emit("ended", ...data)
+            this.$emit("ended")
         },
         play() {
             this.player.play()

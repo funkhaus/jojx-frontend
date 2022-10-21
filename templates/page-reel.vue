@@ -18,7 +18,7 @@
                 <talent-bio
                     :text="bio.text"
                     :abstract="bio.abstract"
-                    :image="bio.imageSecondary"
+                    :image="bio.image"
                     :socials="bio.socials"
                 />
             </grid-work>

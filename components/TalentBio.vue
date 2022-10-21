@@ -1,6 +1,6 @@
 <template>
     <div
-        v-if="image.id"
+        v-if="image.id && text"
         v-intersection-observer="{
             rootMargin: '-50px 0px -50px 0px'
         }"
@@ -47,6 +47,7 @@
 
         <div class="column text-content">
             <div
+                v-prlx
                 class="text"
                 v-html="text"
             />
