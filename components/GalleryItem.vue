@@ -10,7 +10,7 @@
             <wp-image
                 class="image"
                 :image="image"
-                object-fit="contain"
+                object-fit="cover"
                 background-color="transparent"
             />
         </nuxt-link>
