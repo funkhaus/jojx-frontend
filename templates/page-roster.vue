@@ -9,6 +9,7 @@
 import ROSTER from "~/gql/queries/Roster"
 
 export default {
+    transition: "slide-up",
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(ROSTER, {
             uri: route.path

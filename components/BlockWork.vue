@@ -4,6 +4,7 @@
         v-prlx="{ speed: speed }"
         :to="linkTo"
         :class="classes"
+        :style="styles"
     >
         <div class="background">
             <wp-image
@@ -18,7 +19,13 @@
                     v-html="category"
                 />
                 <template #bottom>
-                    <div class="panel-title desktop">
+                    <div
+                        :class="[
+                            'panel-title',
+                            'desktop',
+                            { 'has-talent': talent }
+                        ]"
+                    >
                         <h2
                             v-if="title"
                             class="title"
@@ -145,11 +152,10 @@ export default {
     },
     computed: {
         classes() {
-            return [
-                "block-work",
-                `type-${this.type}`,
-                { "has-text": this.text }
-            ]
+            return ["block-work", `type-${this.type}`]
+        },
+        styles() {
+            return { "z-index": 999 - this.index }
         },
         linkTo() {
             return this.link || this.to
@@ -169,8 +175,7 @@ export default {
 
             return speed
         }
-    },
-    methods: {}
+    }
 }
 </script>
 
@@ -183,6 +188,8 @@ export default {
     position: relative;
     width: 50%;
     margin: 100px auto;
+    box-sizing: border-box;
+
     .background {
         width: 100%;
         box-sizing: border-box;
@@ -204,8 +211,6 @@ export default {
         position: relative;
         z-index: 100;
         max-width: 515px;
-        // padding: 40px 0;
-        // box-sizing: border-box;
         color: var(--theme-color-text);
     }
 
@@ -228,11 +233,14 @@ export default {
         left: 0;
         z-index: 100;
         width: 100%;
-        max-width: 550px;
+        // max-width: 650px;
         margin-right: auto;
-        transform: translate(-5%, 35%);
+        transform: translate(-20px, 40px);
         color: var(--theme-color-background);
         mix-blend-mode: difference;
+        &.has-talent {
+            transform: translate(-20px, 20px);
+        }
     }
     .title {
         font-size: 64px;
@@ -244,7 +252,7 @@ export default {
     .talent {
         font-size: 34px;
         font-style: italic;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
         transform: translate(0, 200%);
         transition: transform 0.4s var(--easing-authentic-motion),
             opacity 0.4s var(--easing-authentic-motion);
@@ -257,9 +265,9 @@ export default {
     .text {
         font-size: 18px;
         opacity: 1;
-        transform: translate(0%, 200%);
+        transform: translate(0%, 150%);
 
-        margin: 40px 0;
+        margin: 40px 0 20px 0;
         transition: transform 0.7s var(--easing-authentic-motion),
             opacity 0.7s var(--easing-authentic-motion);
 
@@ -277,17 +285,16 @@ export default {
 
     .category {
         position: absolute;
-        left: 0;
+        right: 0;
         top: 50%;
-        transform-origin: left;
-        transform: rotate(-90deg) translate(-50%, 100%);
+        transform-origin: right;
+        transform: rotate(90deg) translate(50%, 100%);
         font-style: italic;
     }
 
     .panel-publication {
         display: flex;
         align-items: center;
-        margin-top: 5px;
         font-size: 18px;
         font-weight: 300;
 
@@ -326,34 +333,40 @@ export default {
             transform: translate(0, 25%);
         }
     }
-    &.type-half-width {
+
+    &.type-full-width {
+        width: 100%;
         .background {
-            padding: 150px 90px 50px 90px;
+            padding-bottom: 150px;
+            padding-top: 150px;
         }
-        box-sizing: border-box;
+    }
+
+    &.type-half-width {
         &:nth-of-type(even) {
             .background {
                 padding: 100px 80px 175px 100px;
             }
-        }
-    }
-    &.type-full-width {
-        width: 100%;
-    }
+            .panel-title {
+                text-align: right;
 
-    &:nth-of-type(even) {
-        .panel-title {
-            text-align: right;
-            transform: translate(5%, 35%);
-            margin-right: unset;
-            margin-left: auto;
-        }
-        .category {
-            left: unset;
-            right: 0;
-            top: 50%;
-            transform-origin: right;
-            transform: rotate(90deg) translate(50%, 100%);
+                transform: translate(20px, 40px);
+                margin-right: unset;
+                margin-left: auto;
+                &.has-talent {
+                    transform: translate(20px, 20px);
+                }
+            }
+            .text {
+                margin: 60px 0 20px 0;
+            }
+            .category {
+                right: unset;
+                left: 0;
+                top: 50%;
+                transform-origin: left;
+                transform: rotate(-90deg) translate(-50%, 100%);
+            }
         }
     }
 
@@ -365,10 +378,10 @@ export default {
         &:hover {
             .category {
                 opacity: 1;
-                transform: rotate(-90deg) translate(-50%, -100%);
-            }
-            &:nth-of-type(even) .category {
                 transform: rotate(90deg) translate(50%, -100%);
+            }
+            &.type-half-width:nth-of-type(even) .category {
+                transform: rotate(-90deg) translate(-50%, -100%);
             }
             .title,
             .talent,
@@ -383,6 +396,12 @@ export default {
         }
     }
     // Breakpoints
+    @media #{$gt-cinema} {
+        .panel-title {
+            max-width: 750px;
+        }
+    }
+
     @media #{$lt-tablet} {
         margin: 20px auto;
         width: 100%;
@@ -420,10 +439,11 @@ export default {
         }
         .talent {
             font-size: 22px;
+            margin-bottom: 20px;
         }
         .text {
             font-size: 16px;
-            margin: 0 0 var(--unit-gap) 0;
+            margin: 0;
             ::v-deep p {
                 font-size: 16px;
             }
@@ -443,32 +463,30 @@ export default {
 
         .panel-title {
             position: static;
-
             color: var(--color-black);
             max-width: 100%;
             margin-right: unset;
             transform: translate(0);
-
             mix-blend-mode: unset;
+        }
+        .panel-publication {
+            margin-top: 5px;
         }
 
         // Hovers
         @media #{$has-hover} {
-            &:hover {
-                .category {
-                    opacity: 1;
-                    transform: rotate(0) translate(0);
-                }
+            &:hover .category {
+                opacity: 1;
+                transform: rotate(0) translate(0);
             }
         }
 
         // Block variants
-        &.has-text {
-            .panel-text {
-                max-width: 750px;
-                margin: 0 auto;
-            }
+        .panel-text {
+            max-width: 750px;
+            margin: 0 auto;
         }
+
         &.type-featured {
             .image {
                 max-width: 100%;
@@ -480,15 +498,26 @@ export default {
                 transform: translate(0, 50%);
             }
         }
-        &:nth-of-type(n) {
+        &.type-full-width {
+            .background {
+                padding: 0;
+            }
+        }
+        &.type-half-width:nth-of-type(n) {
             .panel-title {
                 transform: translate(0);
                 text-align: left;
+                &.has-talent {
+                    transform: translate(0);
+                }
             }
-        }
 
-        &.type-half-width:nth-of-type(n) .background {
-            padding: 0px;
+            .background {
+                padding: 0px;
+            }
+            .text {
+                margin-top: 0px;
+            }
         }
 
         .mobile {
@@ -500,7 +529,7 @@ export default {
     }
 
     @media #{$lt-phone} {
-        margin: 20px auto;
+        margin: 0px auto 30px auto;
     }
 }
 </style>

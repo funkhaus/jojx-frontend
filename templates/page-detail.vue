@@ -55,6 +55,7 @@
 import DETAIL from "~/gql/queries/Detail"
 
 export default {
+    transition: "slide-up",
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(DETAIL, {
             uri: route.path
