@@ -92,6 +92,10 @@ export default {
     @media #{$lt-phone} {
         padding: 0 40px;
 
+        .section-title {
+            font-size: 28px;
+        }
+
         .location {
             margin: 0;
         }

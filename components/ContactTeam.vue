@@ -33,7 +33,8 @@ export default {
     padding: 0 0 0 385px;
 
     .section-title {
-        margin: 85px 0 20px;
+        // margin: 85px 0 20px;
+        margin: 0 0 20px 0;
         font-size: 34px;
         font-weight: 300;
         font-style: italic;

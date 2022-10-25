@@ -125,7 +125,6 @@ export default {
     .panel-top {
         position: relative;
         background-color: var(--color-black);
-        overflow: scroll;
     }
 
     .image {

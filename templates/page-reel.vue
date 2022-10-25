@@ -34,7 +34,6 @@ import _clamp from "lodash/clamp"
 import REEL from "~/gql/queries/Reel"
 
 export default {
-    transition: "slide-up",
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(REEL, {
             uri: route.path

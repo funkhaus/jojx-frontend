@@ -55,7 +55,6 @@
 import DETAIL from "~/gql/queries/Detail"
 
 export default {
-    transition: "slide-up",
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(DETAIL, {
             uri: route.path
@@ -146,6 +145,7 @@ export default {
     }
 
     .category {
+        font-size: 18px;
         font-style: italic;
     }
 
@@ -160,9 +160,6 @@ export default {
     .title ::v-deep .line-2 {
         font-weight: 300;
         font-size: 14px;
-    }
-    .category {
-        font-size: 16px;
     }
 
     .panel-bottom {

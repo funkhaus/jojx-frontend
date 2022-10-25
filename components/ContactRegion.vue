@@ -206,6 +206,9 @@ export default {
         .title {
             padding: 0 20px;
             font-size: 34px;
+            ::v-deep p {
+                font-size: 34px;
+            }
         }
         .panel-content {
             display: block;

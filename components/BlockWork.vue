@@ -337,8 +337,7 @@ export default {
     &.type-full-width {
         width: 100%;
         .background {
-            padding-bottom: 150px;
-            padding-top: 150px;
+            padding: 150px 90px;
         }
     }
 
@@ -397,6 +396,13 @@ export default {
     }
     // Breakpoints
     @media #{$gt-cinema} {
+        &.type-full-width {
+            width: 100%;
+            .background {
+                padding: 150px 100px;
+            }
+        }
+
         .panel-title {
             max-width: 750px;
         }
