@@ -189,7 +189,7 @@ export default {
         .video-stage {
             width: calc(100% - 40px);
             padding-top: 60px;
-            height: calc(100vh - 60px); // intentionally not using var
+            height: calc(var(--unit-100vh) - 60px);
 
             ::v-deep .titles {
                 flex-direction: column;

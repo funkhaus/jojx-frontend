@@ -26,8 +26,8 @@ export default {
      ** Default transition for all pages
      */
     pageTransition: {
-        name: "slide-up",
-        mode: "out-in"
+        name: "slide-left",
+        mode: ""
     },
 
     /*

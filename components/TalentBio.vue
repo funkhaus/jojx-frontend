@@ -37,17 +37,18 @@
                 class="abstract desktop"
                 v-html="abstract"
             />
-
+            <!-- TODO: Make cover -->
             <wp-image
+                v-prlx="{ speed: 0.1 }"
                 class="image"
                 :image="image"
-                object-fit="contain"
+                object-fit="cover"
             />
         </div>
 
         <div class="column text-content">
             <div
-                v-prlx
+                v-prlx="{ reverse: true }"
                 class="text"
                 v-html="text"
             />
@@ -139,7 +140,10 @@ export default {
     }
 
     .image {
+        height: 100%;
+        width: 100%;
         max-width: 350px;
+        min-height: 350px; // TODO: Show design, for aspec ratio?
         margin: 0 auto;
     }
 
@@ -223,6 +227,10 @@ export default {
         .column.text-content {
             width: 100%;
         }
+
+        .image {
+            margin: unset;
+        }
         .text {
             max-width: 450px;
             margin: 0 auto;
@@ -231,6 +239,8 @@ export default {
         .abstract {
             top: 0;
             left: 50%;
+        }
+        &.has-intersected .abstract {
             transform: translate(-75%, -75%);
         }
     }

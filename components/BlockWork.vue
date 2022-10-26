@@ -176,7 +176,14 @@ export default {
             return speed
         },
         disablePrlx() {
-            return this.type !== "half-width"
+            // TODO: is there a better way to disable prlx on tablet?
+            if (this.$store.state.winWidth <= 1024) {
+                return true
+            }
+
+            if (this.type !== "half-width") {
+                return true
+            }
         }
     }
 }
@@ -196,12 +203,9 @@ export default {
     .background {
         width: 100%;
         box-sizing: border-box;
-
         padding: 150px 90px 50px 90px;
-
-        // background: var(--theme-color-background);
-        background: transparent;
-        transition: background 0.8s var(--easing-authentic-motion);
+        // background: transparent;
+        // transition: background 0.8s var(--easing-authentic-motion);
     }
 
     .image {
@@ -227,8 +231,8 @@ export default {
         margin: 0;
 
         opacity: 0;
-        transition: transform 0.6s var(--easing-authentic-motion),
-            opacity 0.6s var(--easing-authentic-motion);
+        transition: transform 0.8s var(--easing-authentic-motion),
+            opacity 0.8s var(--easing-authentic-motion);
     }
 
     .panel-title {
@@ -237,29 +241,32 @@ export default {
         left: 0;
         z-index: 100;
         width: 100%;
-        // max-width: 650px;
+        padding: 20px;
+        box-sizing: border-box;
         margin-right: auto;
-        transform: translate(-25px, 40px);
         color: var(--theme-color-background);
         mix-blend-mode: difference;
+        overflow: hidden;
+        /*
+        TODO: Remove transformed styles
+        max-width: 650px;
+        transform: translate(-25px, 40px);
         &.has-talent {
             transform: translate(-25px, 20px);
         }
+        */
     }
     .title {
         font-size: 64px;
         font-weight: 300;
-        margin-bottom: 8px;
         transform: translate(0, 100%);
     }
 
     .talent {
+        margin: 8px 0 0 0;
         font-size: 34px;
         font-style: italic;
-        // margin-bottom: 20px;
         transform: translate(0, 200%);
-        transition: transform 0.4s var(--easing-authentic-motion),
-            opacity 0.4s var(--easing-authentic-motion);
     }
 
     .mask {
@@ -271,7 +278,9 @@ export default {
         opacity: 1;
         transform: translate(0%, 150%);
 
-        margin: 40px 0 5px 0;
+        margin: 20px 0 5px 0;
+        padding: 0 20px;
+        box-sizing: border-box;
         transition: transform 0.7s var(--easing-authentic-motion),
             opacity 0.7s var(--easing-authentic-motion);
 
@@ -320,9 +329,9 @@ export default {
     }
 
     &.has-intersected {
-        .background {
-            background: var(--theme-color-background);
-        }
+        // .background {
+        //     background: var(--theme-color-background);
+        // }
     }
     // Block variants
     &.type-featured {
@@ -357,12 +366,14 @@ export default {
             .panel-title {
                 text-align: right;
 
-                transform: translate(25px, 40px);
                 margin-right: unset;
                 margin-left: auto;
+                /*
+                transform: translate(25px, 40px);
                 &.has-talent {
                     transform: translate(25px, 20px);
                 }
+                */
             }
 
             .category {
@@ -452,17 +463,6 @@ export default {
         }
         .talent {
             font-size: 22px;
-            margin-bottom: 20px;
-        }
-        .text {
-            font-size: 16px;
-            margin: 0;
-            ::v-deep p {
-                font-size: 16px;
-            }
-        }
-        .panel-text {
-            padding: var(--unit-gap);
         }
         .category {
             font-size: 16px;
@@ -480,7 +480,20 @@ export default {
             max-width: 100%;
             margin-right: unset;
             transform: translate(0);
+            padding: 0;
             mix-blend-mode: unset;
+        }
+
+        .text {
+            font-size: 16px;
+            margin: 20px 0 0;
+            padding: 0;
+            ::v-deep p {
+                font-size: 16px;
+            }
+        }
+        .panel-text {
+            padding: var(--unit-gap);
         }
         .panel-publication {
             margin-top: 5px;
@@ -518,8 +531,8 @@ export default {
         }
         &.type-half-width:nth-of-type(n) {
             .panel-title {
-                transform: translate(0);
                 text-align: left;
+                transform: translate(0);
                 &.has-talent {
                     transform: translate(0);
                 }
@@ -531,9 +544,6 @@ export default {
 
             .background {
                 padding: 0px;
-            }
-            .text {
-                margin-top: 0px;
             }
         }
 

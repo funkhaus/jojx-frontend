@@ -32,7 +32,6 @@
 import HOME from "~/gql/queries/Home"
 
 export default {
-    transition: "fade",
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(HOME)
         return {
