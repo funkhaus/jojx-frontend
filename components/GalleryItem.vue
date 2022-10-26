@@ -31,6 +31,10 @@ export default {
         index: {
             type: Number,
             default: 0
+        },
+        pause: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -53,18 +57,34 @@ export default {
             }
         }
     },
+    watch: {
+        pause(newVal, oldVal) {
+            if (newVal) {
+                this.stop()
+            } else {
+                this.start()
+            }
+        }
+    },
     mounted() {
         this.setStyles()
 
-        let rate = this.getRandom(0.8, 1)
-        this.animationId = setInterval(() => {
-            this.setTransX()
-        }, 1000 * rate)
+        this.start()
     },
     destroyed() {
-        clearInterval(this.animationId)
+        // clearInterval(this.animationId)
+        this.stop()
     },
     methods: {
+        start() {
+            let rate = this.getRandom(0.8, 1)
+            this.animationId = setInterval(() => {
+                this.setTransX()
+            }, 1000 * rate)
+        },
+        stop() {
+            clearInterval(this.animationId)
+        },
         getRandom(min = 0, max = 100) {
             return Math.random() * (max - min) + min
         },
@@ -100,6 +120,10 @@ export default {
     padding: 20px;
     box-sizing: border-box;
     transition: transform 1s linear, opacity 0.1s var(--easing-authentic-motion);
+
+    .image ::v-deep .media {
+        opacity: 1;
+    }
     // Breakpoints
     @media #{$lt-phone} {
         min-width: 250px; // DELETE

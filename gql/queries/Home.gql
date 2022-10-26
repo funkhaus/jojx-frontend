@@ -22,13 +22,7 @@ query Home {
                                     id
                                     title
                                     to: uri
-                                    text: encodedContent
-                                    tags {
-                                        nodes {
-                                            id
-                                            name
-                                        }
-                                    }
+                                    text: excerpt
                                     secondaryFeaturedImage {
                                         secondaryFeaturedImage {
                                             ...MediaImage

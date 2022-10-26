@@ -114,6 +114,9 @@ button {
 
     // Gutenberg breakpoints overrides
     @media #{$lt-phone} {
+        .margin-section {
+            margin: var(--unit-margin-small) auto;
+        }
         .gutenberg-spacer {
             display: none;
         }

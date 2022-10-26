@@ -1,7 +1,7 @@
 <template>
     <nuxt-link
-        v-intersection-observer
-        v-prlx="{ speed: speed }"
+        v-intersection-observer="{ threshold: 0.25 }"
+        v-prlx="{ speed: speed, disabled: disablePrlx }"
         :to="linkTo"
         :class="classes"
         :style="styles"
@@ -174,6 +174,9 @@ export default {
             }
 
             return speed
+        },
+        disablePrlx() {
+            return this.type !== "half-width"
         }
     }
 }
@@ -196,8 +199,9 @@ export default {
 
         padding: 150px 90px 50px 90px;
 
-        background-color: var(--theme-color-background);
-        transition: background-color 0.8s var(--easing-authentic-motion);
+        // background: var(--theme-color-background);
+        background: transparent;
+        transition: background 0.8s var(--easing-authentic-motion);
     }
 
     .image {
@@ -235,11 +239,11 @@ export default {
         width: 100%;
         // max-width: 650px;
         margin-right: auto;
-        transform: translate(-20px, 40px);
+        transform: translate(-25px, 40px);
         color: var(--theme-color-background);
         mix-blend-mode: difference;
         &.has-talent {
-            transform: translate(-20px, 20px);
+            transform: translate(-25px, 20px);
         }
     }
     .title {
@@ -267,7 +271,7 @@ export default {
         opacity: 1;
         transform: translate(0%, 150%);
 
-        margin: 40px 0 20px 0;
+        margin: 40px 0 5px 0;
         transition: transform 0.7s var(--easing-authentic-motion),
             opacity 0.7s var(--easing-authentic-motion);
 
@@ -297,6 +301,7 @@ export default {
         align-items: center;
         font-size: 18px;
         font-weight: 300;
+        font-style: italic;
 
         opacity: 0;
         transform: translate(0, 100%);
@@ -315,6 +320,9 @@ export default {
     }
 
     &.has-intersected {
+        .background {
+            background: var(--theme-color-background);
+        }
     }
     // Block variants
     &.type-featured {
@@ -349,16 +357,14 @@ export default {
             .panel-title {
                 text-align: right;
 
-                transform: translate(20px, 40px);
+                transform: translate(25px, 40px);
                 margin-right: unset;
                 margin-left: auto;
                 &.has-talent {
-                    transform: translate(20px, 20px);
+                    transform: translate(25px, 20px);
                 }
             }
-            .text {
-                margin: 60px 0 20px 0;
-            }
+
             .category {
                 right: unset;
                 left: 0;
@@ -413,6 +419,7 @@ export default {
         width: 100%;
         .background {
             padding: 0;
+            background: transparent;
         }
         .title,
         .talent,
@@ -516,6 +523,10 @@ export default {
                 &.has-talent {
                     transform: translate(0);
                 }
+            }
+            .category {
+                top: 0;
+                transform: rotate(0) translate(0);
             }
 
             .background {

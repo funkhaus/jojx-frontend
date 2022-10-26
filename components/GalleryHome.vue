@@ -1,11 +1,19 @@
 <template>
-    <div :class="classes">
+    <div
+        v-intersection-observer="{
+            rootMargin: '0px 0px 300px 0px'
+        }"
+        :class="classes"
+        @has-entered="onEnter"
+        @has-exited="onExit"
+    >
         <gallery-item
             v-for="(item, i) in items"
             :key="item.id"
             :image="item.image"
             :to="item.to"
             :index="i"
+            :pause="pause"
         />
     </div>
 </template>
@@ -22,12 +30,25 @@ export default {
             default: false
         }
     },
+    data() {
+        return {
+            pause: false
+        }
+    },
     computed: {
         classes() {
             return [
                 "gallery-home",
                 { "intro-is-complete": this.introIsComplete }
             ]
+        }
+    },
+    methods: {
+        onEnter() {
+            this.pause = false
+        },
+        onExit() {
+            this.pause = true
         }
     }
 }

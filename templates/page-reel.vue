@@ -60,7 +60,8 @@ export default {
                 imageSecondary:
                     this.page?.secondaryFeaturedImage?.secondaryFeaturedImage ||
                     {},
-                abstract: this.page?.talentMeta?.abstract || "",
+                text: this.page?.talentMeta?.abstract || "",
+                abstract: this.page?.text || "",
                 socials: this.page?.talentMeta?.contactInfo || []
             }
         },
@@ -79,8 +80,8 @@ export default {
                     type: obj?.workMeta?.type || "",
                     text: obj?.excerpt || "",
                     link: obj?.workMeta?.link || "",
-                    publication: obj?.workMeta?.publication || "",
-                    talent: obj?.workMeta?.talentName || ""
+                    publication: obj?.workMeta?.publication || ""
+                    // talent: obj?.workMeta?.talentName || ""
                 }
             })
         },
@@ -121,7 +122,7 @@ export default {
 <style lang="scss" scoped>
 .page-reel {
     color: var(--color-black);
-    margin: 0 auto;
+    margin: 0 auto 150px auto;
     min-height: var(--unit-100vh);
     overflow: hidden;
 
@@ -199,6 +200,7 @@ export default {
 
     /* Breakpoints */
     @media #{$lt-tablet} {
+        margin-bottom: 60px;
         .title {
             font-size: 125px;
         }

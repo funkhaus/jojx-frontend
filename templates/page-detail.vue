@@ -65,11 +65,14 @@ export default {
     },
     computed: {
         parsedPage() {
+            let talent = this.page?.workMeta?.talentName || ""
+            if (this.$route.name.includes("studio")) {
+                talent = this.page?.parent?.node?.title || ""
+            }
             return {
                 ...this.page,
+                talent,
                 videoUrl: this.page?.workMeta?.videoUrl || "",
-                talent: this.page?.workMeta?.talentName || "",
-                // this.page?.parent?.node?.title ||
                 category: "wildcard"
             }
         }
@@ -96,8 +99,8 @@ export default {
 
     .video-stage {
         min-height: 550px;
-        padding-top: 75px;
-        height: calc(var(--unit-100vh) - 175px);
+        padding-top: 100px;
+        height: calc(var(--unit-100vh) - 200px);
         width: calc(100% - 180px);
         box-sizing: border-box;
         margin: 0 auto;
@@ -186,7 +189,8 @@ export default {
         .video-stage {
             width: calc(100% - 40px);
             padding-top: 60px;
-            height: calc(var(--unit-100vh) - 60px);
+            height: calc(100vh - 60px); // intentionally not using var
+
             ::v-deep .titles {
                 flex-direction: column;
             }
@@ -205,7 +209,7 @@ export default {
         .titles {
             bottom: 0px;
             padding-right: 20px;
-            transform: translate(0, -200%);
+            transform: translate(0, -100%);
         }
         .category {
             font-size: 17px;
