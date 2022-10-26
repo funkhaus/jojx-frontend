@@ -167,6 +167,10 @@ export default {
         margin-top: var(--unit-gap);
     }
 
+    #content {
+        max-width: 1400px;
+    }
+
     // Hover states
     @media #{$has-hover} {
         // Hover styles would go here
