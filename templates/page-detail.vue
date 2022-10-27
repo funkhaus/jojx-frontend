@@ -148,6 +148,7 @@ export default {
 
         color: var(--color-white);
         font-size: 18px;
+        line-height: 1;
         font-family: var(--font-primary);
         font-weight: 300;
         text-transform: capitalize;
@@ -177,7 +178,7 @@ export default {
     }
 
     .panel-bottom {
-        padding: var(--unit-gap);
+        padding: var(--unit-gap) 0;
         margin-top: var(--unit-gap);
     }
 
@@ -231,7 +232,7 @@ export default {
             left: unset;
             right: 0;
             transform: translate(0);
-            padding-bottom: 20px;
+            padding-bottom: 16px;
             font-size: 16px;
         }
     }

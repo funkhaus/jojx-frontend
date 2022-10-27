@@ -122,8 +122,8 @@ export default {
             this.transX = this.transX - 40
 
             //  transformY
-            if (this.skew !== 0 || this.skew !== 1) {
-                let rate = getRandom(0.27, 0.36)
+            if (this.skew !== 0 && this.skew !== 1) {
+                let rate = 0.5 //getRandom(0.27, 0.36)
                 this.transY = this.posY * this.skew * rate
             } else {
                 this.transY = this.posY
@@ -131,7 +131,7 @@ export default {
         },
         setStyles() {
             let direction = this.index % 2 == 0 ? -1 : 1
-            this.posY = getRandom() * direction
+            this.posY = getRandom(0, 150) * direction
             this.scale = getRandom(0.75, 2)
         },
         onEnter() {
@@ -146,7 +146,7 @@ export default {
 
 <style lang="scss" scoped>
 .gallery-item {
-    min-width: 500px; // DELETE ?
+    min-width: 350px; // DELETE ?
     padding: 20px;
     box-sizing: border-box;
     transition: transform 1s linear, opacity 0.1s var(--easing-authentic-motion);
