@@ -69,7 +69,8 @@ export default {
         padding: 0 25px;
         text-align: right;
         transform: translate(-40%, 0);
-        transition: transform 0.6s var(--easing-authentic-motion);
+        transition: transform 0.6s var(--easing-authentic-motion),
+            color 0.4s var(--easing-authentic-motion);
     }
 
     ::v-deep .image {
@@ -119,8 +120,13 @@ export default {
             .image {
                 z-index: 10;
                 opacity: 1;
-                transform: translate(-50%, -50%);
+                transform: translate(-75%, -50%);
                 clip-path: inset(0%);
+            }
+            &:nth-of-type(even) {
+                .image {
+                    transform: translate(-25%, -50%);
+                }
             }
         }
     }
@@ -145,9 +151,13 @@ export default {
         }
 
         ::v-deep .image {
-            // transform: translate(0%, -50%);
-            // width: 100%;
             display: none;
+        }
+
+        @media #{$has-hover} {
+            ::v-deep .list-item:hover .link {
+                color: var(--color-gray);
+            }
         }
     }
 }

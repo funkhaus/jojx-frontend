@@ -47,7 +47,7 @@ export default {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
+    // justify-content: center;
     align-items: flex-end;
     // align-content: center;
 
@@ -60,8 +60,9 @@ export default {
         padding: 0;
         margin: 0;
         text-align: right;
+        margin-top: 100px;
         .menu-item {
-            font-size: 26px;
+            font-size: 56px;
             padding: 12px 0;
             line-height: 1;
             color: var(--color-white);

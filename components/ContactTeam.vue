@@ -1,6 +1,6 @@
 <template lang="html">
     <div
-        v-intersection-observer
+        v-intersection-observer.once
         class="contact-team"
     >
         <h3 class="section-title">

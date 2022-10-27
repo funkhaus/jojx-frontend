@@ -22,7 +22,6 @@ export default {
     computed: {
         parsedItems() {
             return this.items.map((obj) => {
-                // Flatten the "attributes"
                 return {
                     ...obj,
                     image: obj?.featuredImage?.node || {}

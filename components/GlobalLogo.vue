@@ -32,7 +32,7 @@ export default {
 <style lang="scss" scoped>
 .global-logo {
     position: fixed;
-    z-index: 700;
+    z-index: 900;
     bottom: 35px;
     left: var(--unit-gap);
     mix-blend-mode: difference;
@@ -86,6 +86,12 @@ export default {
         .route-studio & {
             opacity: 0;
             pointer-events: none;
+        }
+
+        .menu-is-open.route-directors &,
+        .menu-is-open.route-studio & {
+            opacity: 1;
+            pointer-events: all;
         }
     }
 }

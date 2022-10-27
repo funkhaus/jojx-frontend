@@ -13,6 +13,7 @@ query Detail($uri: String!) {
                     ... on Page {
                         id
                         title
+                        to: uri
                     }
                 }
             }

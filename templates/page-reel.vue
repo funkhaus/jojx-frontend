@@ -40,7 +40,7 @@ export default {
         })
         return {
             page: data?.nodeByUri || {},
-            items: data?.nodeByUri?.children?.nodes || {}
+            items: data?.nodeByUri?.children?.nodes || []
         }
     },
     data() {
@@ -56,9 +56,9 @@ export default {
         bio() {
             return {
                 ...this.page,
-                image: this.page?.featuredImage?.node || {},
-                imageSecondary:
+                image:
                     this.page?.secondaryFeaturedImage?.secondaryFeaturedImage ||
+                    this.page?.featuredImage?.node ||
                     {},
                 text: this.page?.talentMeta?.abstract || "",
                 abstract: this.page?.text || "",
@@ -66,8 +66,6 @@ export default {
             }
         },
         gridItems() {
-            // let items = this.page?.children?.nodes?.[1].children?.nodes || []
-
             return this.items.map((obj) => {
                 // Start by flatterning the "attributes"
                 return {

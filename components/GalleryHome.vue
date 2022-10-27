@@ -43,6 +43,15 @@ export default {
             ]
         }
     },
+    // TODO: add pause when tab inactive
+    /*
+    mounted() {
+        document.addEventListener("visibilitychange", onchange);
+    },
+    destroyed() {
+        document.removeEventListener("visibilitychange", onchange);
+    },
+    */
     methods: {
         onEnter() {
             this.pause = false

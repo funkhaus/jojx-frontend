@@ -4,6 +4,8 @@
             v-if="parsedPage.talent"
             :text="parsedPage.talent"
             class="talent"
+            :to="parsedPage.to"
+            element="wp-link"
         />
 
         <div class="panel-top">
@@ -66,12 +68,20 @@ export default {
     computed: {
         parsedPage() {
             let talent = this.page?.workMeta?.talentName || ""
+            let to = ""
+
             if (this.$route.name.includes("studio")) {
                 talent = this.page?.parent?.node?.title || ""
+                to = this.page?.parent?.node?.to || ""
             }
+            if (this.$route.name.includes("director")) {
+                to = this.page?.parent?.node?.to || ""
+            }
+
             return {
                 ...this.page,
                 talent,
+                to,
                 videoUrl: this.page?.workMeta?.videoUrl || "",
                 category: "wildcard"
             }
@@ -137,7 +147,8 @@ export default {
         transform: translate(-50%, 0);
 
         color: var(--color-white);
-        font-size: 16px;
+        font-size: 18px;
+        font-family: var(--font-primary);
         font-weight: 300;
         text-transform: capitalize;
         padding: 20px 20px 40px;
@@ -221,6 +232,7 @@ export default {
             right: 0;
             transform: translate(0);
             padding-bottom: 20px;
+            font-size: 16px;
         }
     }
 }

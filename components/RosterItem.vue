@@ -2,6 +2,7 @@
     <component
         :is="element"
         :class="classes"
+        :to="to"
     >
         <div
             v-for="text in parsedText"
@@ -18,7 +19,10 @@ export default {
             type: String,
             default: ""
         },
-
+        to: {
+            type: String,
+            default: ""
+        },
         element: {
             type: String,
             default: "span"

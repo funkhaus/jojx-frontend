@@ -127,6 +127,15 @@ export default {
     // Breakpoints
     @media #{$lt-phone} {
         min-width: 250px; // DELETE
+
+        .image ::v-deep .media {
+            &.media-image {
+                opacity: 1;
+            }
+            &.media-video {
+                display: none !important;
+            }
+        }
     }
 }
 </style>

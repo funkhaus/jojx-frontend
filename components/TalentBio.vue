@@ -42,6 +42,7 @@
                 v-prlx="{ speed: 0.1 }"
                 class="image"
                 :image="image"
+                :aspect-ratio="100"
                 object-fit="cover"
             />
         </div>
@@ -143,7 +144,7 @@ export default {
         height: 100%;
         width: 100%;
         max-width: 350px;
-        min-height: 350px; // TODO: Show design, for aspec ratio?
+        // min-height: 350px; // TODO: Show design, for aspec ratio?
         margin: 0 auto;
     }
 

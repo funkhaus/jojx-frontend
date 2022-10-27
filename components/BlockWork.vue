@@ -90,9 +90,8 @@
                             class="publication"
                             v-text="publication"
                         />
-                        <!-- TODO: get correct arrow from design -->
+
                         <svg-arrow-right class="svg" />
-                        <!-- <span v-html="'&#8594'"/> -->
                     </div>
                 </div>
             </div>
@@ -176,14 +175,15 @@ export default {
             return speed
         },
         disablePrlx() {
-            // TODO: is there a better way to disable prlx on tablet?
+            // TODO:  better way to disable prlx on tablet
+            let output = false
             if (this.$store.state.winWidth <= 1024) {
-                return true
+                output = true
             }
-
             if (this.type !== "half-width") {
-                return true
+                output = true
             }
+            return output
         }
     }
 }
@@ -197,7 +197,7 @@ export default {
 
     position: relative;
     width: 50%;
-    margin: 100px auto;
+    margin: 150px auto;
     box-sizing: border-box;
 
     .background {
@@ -220,6 +220,8 @@ export default {
         z-index: 100;
         max-width: 515px;
         color: var(--theme-color-text);
+        padding: 0 20px;
+        box-sizing: border-box;
     }
 
     .title,
@@ -279,8 +281,7 @@ export default {
         transform: translate(0%, 150%);
 
         margin: 20px 0 5px 0;
-        padding: 0 20px;
-        box-sizing: border-box;
+
         transition: transform 0.7s var(--easing-authentic-motion),
             opacity 0.7s var(--easing-authentic-motion);
 
@@ -416,10 +417,17 @@ export default {
         &.type-full-width {
             width: 100%;
             .background {
-                padding: 150px 100px;
+                padding: 250px 100px;
             }
         }
-
+        &.type-half-width {
+            .background {
+                padding: 425px 120px 350px 190px;
+            }
+            &:nth-of-type(even) .background {
+                padding: 400px 90px 475px 150px;
+            }
+        }
         .panel-title {
             max-width: 750px;
         }
@@ -483,6 +491,10 @@ export default {
             padding: 0;
             mix-blend-mode: unset;
         }
+        .panel-text {
+            padding: 0;
+            padding: var(--unit-gap);
+        }
 
         .text {
             font-size: 16px;
@@ -492,15 +504,14 @@ export default {
                 font-size: 16px;
             }
         }
-        .panel-text {
-            padding: var(--unit-gap);
-        }
+
         .panel-publication {
             margin-top: 5px;
         }
 
         // Hovers
         @media #{$has-hover} {
+            &.type-half-width:nth-of-type(even):hover .category,
             &:hover .category {
                 opacity: 1;
                 transform: rotate(0) translate(0);
@@ -519,9 +530,7 @@ export default {
                 min-height: 500px;
             }
             .image.secondary {
-                max-width: 40%;
-                min-height: unset;
-                transform: translate(0, 50%);
+                display: none;
             }
         }
         &.type-full-width {

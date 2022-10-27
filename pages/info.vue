@@ -9,6 +9,7 @@
             :social-links="infoData.socialLinks"
             :title="infoData.title"
         />
+
         <contact-team :items="teamReps" />
         <contact-reps :regions="regions" />
     </section>
@@ -19,7 +20,6 @@
 import INFO from "~/gql/queries/Info"
 
 export default {
-    transition: "slide-up",
     async asyncData({ $graphql, route }) {
         const data = await $graphql.default.request(INFO, {
             uri: route.path

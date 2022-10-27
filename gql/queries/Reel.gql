@@ -5,6 +5,7 @@ query Reel($uri: String!) {
         ... on Page {
             id
             title
+            to: uri
             text: encodedContent
             excerpt
             featuredImage {
