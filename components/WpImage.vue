@@ -1,7 +1,6 @@
 <template>
     <figure :class="classes">
         <slot name="top" />
-        <slot />
         <img
             v-if="parsedSrc && !disabled"
             ref="img"
@@ -23,7 +22,6 @@
             class="media media-video"
             :src="parsedVideoUrl"
             :style="mediaStyles"
-            :poster="parsedSrc"
             :loop="loop"
             :autoplay="autoplay"
             :muted="muted"
@@ -33,6 +31,7 @@
             @error="onError('video')"
             @ended="onEnded"
             @playing="onPlaying"
+            @pause="onPause"
         />
 
         <div
@@ -50,6 +49,7 @@
             v-html="parsedCaption"
         />
 
+        <slot />
         <slot name="bottom" />
     </figure>
 </template>
@@ -57,7 +57,7 @@
 <script>
 // Helpers
 import Vue from "vue"
-import _get from "lodash/get"
+
 export default {
     props: {
         image: {
@@ -149,7 +149,8 @@ export default {
             errorStatus: {
                 image: false,
                 video: false
-            }
+            },
+            isPlaying: false
         }
     },
     computed: {
@@ -166,7 +167,8 @@ export default {
                 `object-fit-${this.objectFit}`,
                 { "is-svg": this.isSvg },
                 { "is-video": this.isVideo },
-                { "is-disabled": this.disabled }
+                { "is-disabled": this.disabled },
+                { "is-playing": this.isPlaying }
             ]
         },
         aspectPadding() {
@@ -195,48 +197,51 @@ export default {
             if (this.height) {
                 return parseInt(this.height)
             }
-            return _get(this, "image.mediaDetails.height", "auto")
+            return this.image?.mediaDetails?.height || "auto"
         },
         parsedWidth() {
             // default to defined width
             if (this.width) {
                 return parseInt(this.width)
             }
-            return _get(this, "image.mediaDetails.width", "auto")
+            return this.image?.mediaDetails?.width || "auto"
         },
         parsedSrc() {
-            return this.src || _get(this, "image.sourceUrl", "")
+            return this.src || this.image?.sourceUrl || ""
         },
         parsedSrcset() {
-            return this.srcset || _get(this, "image.srcSet", "")
+            return this.srcset || this.image?.srcSet || ""
         },
         parsedSizes() {
-            return this.sizes || _get(this, "image.sizes", "")
+            return this.sizes || this.image?.sizes || ""
         },
         parsedColor() {
             return (
                 this.backgroundColor ||
-                _get(this, "image.imageMeta.primaryColor", "")
+                this.image?.imageMeta?.primaryColor ||
+                ""
             )
         },
         parsedVideoUrl() {
-            return this.videoUrl || _get(this, "image.imageMeta.videoUrl", "")
+            return this.videoUrl || this.image?.imageMeta?.videoUrl || ""
         },
         parsedFocalPoint() {
             return {
                 x:
-                    _get(this, "focalPoint.x", false) ||
-                    _get(this.image, "imageMeta.focalPointX", ""),
+                    (this.focalPoint.x, false) ||
+                    this.image?.imageMeta?.focalPointX ||
+                    "",
                 y:
-                    _get(this, "focalPoint.y", false) ||
-                    _get(this.image, "imageMeta.focalPointY", "")
+                    (this.focalPoint.y, false) ||
+                    this.image?.imageMeta?.focalPointY ||
+                    ""
             }
         },
         parsedAlt() {
-            return this.alt || _get(this, "image.altText", "")
+            return this.alt || this.image?.altText || ""
         },
         parsedCaption() {
-            return this.caption || _get(this, "image.caption", "")
+            return this.caption || this.image?.caption || ""
         },
         sizerStyles() {
             let styles = {}
@@ -339,9 +344,15 @@ export default {
         },
         onEnded($event) {
             this.$emit(`ended`, $event)
+            this.isPlaying = false
         },
         onPlaying($event) {
             this.$emit(`playing`, $event)
+            this.isPlaying = true
+        },
+        onPause($event) {
+            this.$emit(`paused`, $event)
+            this.isPlaying = false
         },
         play() {
             if (this.$refs.video) {
@@ -437,12 +448,17 @@ export default {
 
     // Loaded state
     &.has-loaded {
-        .media {
+        .media-image {
             opacity: 1;
         }
-        &.is-video .media-image {
-            // Hide image when video is loaded to avoid overlaps
+    }
+    &.is-playing {
+        .media-image {
+            // Hide image when video is playing to avoid overlaps
             opacity: 0;
+        }
+        .media-video {
+            opacity: 1;
         }
     }
 

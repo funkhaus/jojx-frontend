@@ -1,11 +1,12 @@
 <template>
     <div
         v-intersection-observer="{
-            rootMargin: '0px 0px 300px 0px'
+            rootMargin: '300px 0px 300px 0px'
         }"
         :class="classes"
         @has-entered="onEnter"
         @has-exited="onExit"
+        @mouseleave="resetSkew"
     >
         <gallery-item
             v-for="(item, i) in items"
@@ -14,11 +15,14 @@
             :to="item.to"
             :index="i"
             :pause="pause"
+            :skew="skew"
         />
     </div>
 </template>
 
 <script>
+import _throttle from "lodash/throttle"
+
 export default {
     props: {
         items: {
@@ -32,7 +36,8 @@ export default {
     },
     data() {
         return {
-            pause: false
+            pause: false,
+            skew: 1
         }
     },
     computed: {
@@ -43,21 +48,43 @@ export default {
             ]
         }
     },
-    // TODO: add pause when tab inactive
-    /*
+
     mounted() {
-        document.addEventListener("visibilitychange", onchange);
+        document.addEventListener(
+            "visibilitychange",
+            _throttle(this.onVisibilitychange, 10)
+        )
+        if (this.$store.state.breakpoint !== "mobile") {
+            document.addEventListener(
+                "mousemove",
+                _throttle(this.onMouseEvent, 10)
+            )
+        }
     },
     destroyed() {
-        document.removeEventListener("visibilitychange", onchange);
+        document.removeEventListener(
+            "visibilitychange",
+            this.onVisibilitychange
+        )
+        document.removeEventListener("mousemove", this.onMouseEvent)
     },
-    */
     methods: {
         onEnter() {
             this.pause = false
         },
         onExit() {
             this.pause = true
+        },
+        onVisibilitychange(e) {
+            this.pause = !this.pause
+        },
+        onMouseEvent(e) {
+            const clientY = e.clientY || e.touches[0].clientY
+            // get position as percent of screen location
+            this.skew = clientY / this.$store.state.winHeight
+        },
+        resetSkew() {
+            this.skew = 1
         }
     }
 }
@@ -73,7 +100,6 @@ export default {
     transform: translate(100%, 0);
     z-index: 100;
     background-color: var(--theme-color-background);
-    // overflow: scroll;
 
     overflow: hidden;
     white-space: nowrap;

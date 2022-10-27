@@ -1,7 +1,8 @@
 <template>
     <nuxt-link
+        :key="prlxIsDisabled"
         v-intersection-observer="{ threshold: 0.25 }"
-        v-prlx="{ speed: speed, disabled: disablePrlx }"
+        v-prlx="{ speed: speed, disabled: prlxIsDisabled }"
         :to="linkTo"
         :class="classes"
         :style="styles"
@@ -149,6 +150,11 @@ export default {
             default: 0
         }
     },
+    data() {
+        return {
+            prlxIsDisabled: false
+        }
+    },
     computed: {
         classes() {
             return ["block-work", `type-${this.type}`]
@@ -175,15 +181,24 @@ export default {
             return speed
         },
         disablePrlx() {
-            // TODO:  better way to disable prlx on tablet
-            let output = false
-            if (this.$store.state.winWidth <= 1024) {
-                output = true
-            }
             if (this.type !== "half-width") {
-                output = true
+                this.prlxIsDisabled = true
             }
-            return output
+
+            return this.prlxIsDisabled
+        }
+    },
+    watch: {
+        "$store.state.breakpoint": {
+            immediate: true,
+            handler(newVal, oldVal) {
+                if (newVal == "desktop") {
+                    this.prlxIsDisabled = false
+                } else {
+                    console.log("disable Prlx")
+                    this.prlxIsDisabled = true
+                }
+            }
         }
     }
 }
@@ -250,7 +265,7 @@ export default {
         mix-blend-mode: difference;
         overflow: hidden;
         /*
-        TODO: Remove transformed styles
+        TODO: Remove transformed styles and bg styles when client approves
         max-width: 650px;
         transform: translate(-25px, 40px);
         &.has-talent {
@@ -444,8 +459,7 @@ export default {
         .talent,
         .category,
         .text,
-        .panel-text,
-        .panel-publication {
+        .panel-text {
             opacity: 1;
             transform: translate(0);
         }
@@ -460,7 +474,8 @@ export default {
         .panel-text.has-intersected {
             .title,
             .talent,
-            .text {
+            .text,
+            .panel-publication {
                 opacity: 1;
                 transform: translate(0);
             }
