@@ -104,23 +104,24 @@ export default {
             // TODO: Imrpove loop?
             // transformX
             const posX = this.$refs.item.$el.getBoundingClientRect().x
-
+            // fade out
             if (posX <= -1000) {
                 this.opacity = 0
             }
+            // reset
             if (posX <= -2500) {
                 this.transX = 500
                 setTimeout(() => {
                     this.opacity = 1
                 }, 1100)
             }
+            // slide left
             this.transX = this.transX - 40
 
             //  transformY
             if (this.skew !== 0 && this.skew !== 1) {
-                let rate = 0.05
-                let dir = this.index % 2 == 0 ? 1 : -1
-                this.transY = this.posY + this.skew * rate
+                let intensity = 0.05
+                this.transY = this.posY + this.skew * intensity
             } else {
                 this.transY = this.posY
             }
