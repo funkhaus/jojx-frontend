@@ -2,14 +2,9 @@
     <client-only>
         <nuxt-link
             ref="item"
-            v-intersection-observer="{
-                rootMargin: '0px 300px 0px 300px'
-            }"
             :style="styles"
             :class="classes"
             :to="to"
-            @has-entered.native="onEnter"
-            @has-exited.native="onExit"
         >
             <wp-image
                 class="image"
@@ -106,7 +101,7 @@ export default {
             clearInterval(this.animationId)
         },
         setTransform() {
-            // TODO: Imrpove loop
+            // TODO: Imrpove loop?
             // transformX
             const posX = this.$refs.item.$el.getBoundingClientRect().x
 
@@ -123,8 +118,9 @@ export default {
 
             //  transformY
             if (this.skew !== 0 && this.skew !== 1) {
-                let rate = 0.5 //getRandom(0.27, 0.36)
-                this.transY = this.posY * this.skew * rate
+                let rate = 0.05
+                let dir = this.index % 2 == 0 ? 1 : -1
+                this.transY = this.posY + this.skew * rate
             } else {
                 this.transY = this.posY
             }
@@ -133,12 +129,6 @@ export default {
             let direction = this.index % 2 == 0 ? -1 : 1
             this.posY = getRandom(0, 150) * direction
             this.scale = getRandom(0.75, 2)
-        },
-        onEnter() {
-            // this.opacity = 1
-        },
-        onExit() {
-            // this.opacity = 0
         }
     }
 }

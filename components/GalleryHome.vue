@@ -48,7 +48,6 @@ export default {
             ]
         }
     },
-
     mounted() {
         document.addEventListener(
             "visibilitychange",
@@ -80,8 +79,8 @@ export default {
         },
         onMouseEvent(e) {
             const clientY = e.clientY || e.touches[0].clientY
-            // get position as percent of screen location
-            this.skew = clientY / this.$store.state.winHeight
+
+            this.skew = -1 * (clientY - this.$store.state.winHeight / 2)
         },
         resetSkew() {
             this.skew = 1
