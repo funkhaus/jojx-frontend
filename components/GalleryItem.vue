@@ -105,11 +105,9 @@ export default {
             // transformX
             const posX = this.$refs.item.$el.getBoundingClientRect().x
             // fade out
-            if (posX <= -1000) {
+            if (posX <= -2000) {
+                console.log("posX", this.index)
                 this.opacity = 0
-            }
-            // reset
-            if (posX <= -2500) {
                 this.transX = 500
                 setTimeout(() => {
                     this.opacity = 1
