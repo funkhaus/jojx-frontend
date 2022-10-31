@@ -107,14 +107,14 @@ export default {
 
             console.log("positionX", this.index, posX)
             // fade out
-            if (posX <= -3000) {
-                console.log("reset")
-                this.opacity = 0
-                this.transX = 500
-                setTimeout(() => {
-                    this.opacity = 1
-                }, 1100)
-            }
+            // if (posX <= -2000) {
+            //     console.log("reset")
+            //     this.opacity = 0
+            //     this.transX = 500
+            //     setTimeout(() => {
+            //         this.opacity = 1
+            //     }, 1100)
+            // }
             // slide left
             this.transX = this.transX - 40
 
