@@ -93,6 +93,9 @@ export default {
             opacity: 1;
             pointer-events: all;
         }
+        .menu-is-open.route-index & {
+            transform: scale(0.15);
+        }
     }
 }
 </style>

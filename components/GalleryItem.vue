@@ -107,7 +107,7 @@ export default {
 
             console.log("positionX", this.index, posX)
             // fade out
-            if (posX <= -2000) {
+            if (posX <= -3000) {
                 console.log("reset")
                 this.opacity = 0
                 this.transX = 500
@@ -138,7 +138,7 @@ export default {
 
 <style lang="scss" scoped>
 .gallery-item {
-    min-width: 350px; // DELETE ?
+    min-width: 350px;
     padding: 20px;
     box-sizing: border-box;
     transition: transform 1s linear, opacity 0.1s var(--easing-authentic-motion);
@@ -148,7 +148,7 @@ export default {
     }
     // Breakpoints
     @media #{$lt-phone} {
-        min-width: 250px; // DELETE ?
+        min-width: 250px;
 
         .image ::v-deep .media {
             &.media-image {
