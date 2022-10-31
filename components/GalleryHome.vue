@@ -72,6 +72,7 @@ export default {
             this.pause = false
         },
         onExit() {
+            console.log("pause")
             this.pause = true
         },
         onVisibilitychange(e) {

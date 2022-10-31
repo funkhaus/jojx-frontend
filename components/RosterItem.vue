@@ -38,7 +38,7 @@ export default {
         },
         parsedText() {
             let split = this.text.split(" ")
-            // return split
+
             return split.map((text) => {
                 return (text += " ")
             })

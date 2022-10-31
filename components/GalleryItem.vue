@@ -104,9 +104,11 @@ export default {
             // TODO: Imrpove loop?
             // transformX
             const posX = this.$refs.item.$el.getBoundingClientRect().x
+
+            console.log("positionX", this.index, posX)
             // fade out
             if (posX <= -2000) {
-                console.log("posX", this.index)
+                console.log("reset")
                 this.opacity = 0
                 this.transX = 500
                 setTimeout(() => {
@@ -118,7 +120,7 @@ export default {
 
             //  transformY
             if (this.skew !== 0 && this.skew !== 1) {
-                let intensity = 0.05
+                const intensity = 0.05
                 this.transY = this.posY + this.skew * intensity
             } else {
                 this.transY = this.posY
@@ -127,6 +129,7 @@ export default {
         setStyles() {
             let direction = this.index % 2 == 0 ? -1 : 1
             this.posY = getRandom(0, 150) * direction
+            this.transY = this.posY
             this.scale = getRandom(0.75, 2)
         }
     }

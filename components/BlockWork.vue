@@ -2,7 +2,11 @@
     <nuxt-link
         :key="prlxIsDisabled"
         v-intersection-observer="{ threshold: 0.25 }"
-        v-prlx="{ speed: speed, disabled: prlxIsDisabled }"
+        v-prlx="{
+            speed: speed,
+            disabled: prlxIsDisabled,
+            reverse: index % 2 == 0
+        }"
         :to="linkTo"
         :class="classes"
         :style="styles"
@@ -166,7 +170,7 @@ export default {
             return this.link || this.to
         },
         speed() {
-            let speed = this.index % 2 == 0 ? 0.3 : 0.25
+            let speed = this.index % 2 == 0 ? 0.35 : 0.25
 
             switch (this.type) {
                 case "featured":
@@ -180,6 +184,7 @@ export default {
 
             return speed
         },
+        // TODO: remove?
         disablePrlx() {
             if (this.type !== "half-width") {
                 this.prlxIsDisabled = true
@@ -371,6 +376,7 @@ export default {
         width: 100%;
         .background {
             padding: 150px 90px;
+            margin-bottom: 200px;
         }
     }
 
@@ -551,6 +557,7 @@ export default {
         &.type-full-width {
             .background {
                 padding: 0;
+                margin-bottom: 0px;
             }
         }
         &.type-half-width:nth-of-type(n) {

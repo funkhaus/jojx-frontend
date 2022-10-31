@@ -39,7 +39,7 @@
             />
             <!-- TODO: Make cover -->
             <wp-image
-                v-prlx="{ speed: 0.1 }"
+                v-prlx="{ speed: 0.25 }"
                 class="image"
                 :image="image"
                 :aspect-ratio="100"
@@ -49,7 +49,7 @@
 
         <div class="column text-content">
             <div
-                v-prlx="{ reverse: true }"
+                v-prlx="{ reverse: true, speed: 0.1 }"
                 class="text"
                 v-html="text"
             />
@@ -144,7 +144,6 @@ export default {
         height: 100%;
         width: 100%;
         max-width: 350px;
-        // min-height: 350px; // TODO: Show design, for aspec ratio?
         margin: 0 auto;
     }
 
@@ -170,7 +169,7 @@ export default {
         box-sizing: border-box;
         font-size: 18px;
         line-height: 1.3;
-        max-width: 350px;
+        max-width: 450px;
         margin-right: auto;
         ::v-deep * {
             font-size: 18px;
