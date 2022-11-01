@@ -61,7 +61,7 @@ export default {
         },
         styles() {
             return {
-                transform: `translate(${this.transX}%, ${this.transY}%) scale(${this.scale})`,
+                transform: `translate3d(${this.transX}%, ${this.transY}%, 0) scale(${this.scale})`,
                 opacity: this.opacity
             }
         },
@@ -107,14 +107,14 @@ export default {
 
             console.log("positionX", this.index, posX)
             // fade out
-            // if (posX <= -2000) {
-            //     console.log("reset")
-            //     this.opacity = 0
-            //     this.transX = 500
-            //     setTimeout(() => {
-            //         this.opacity = 1
-            //     }, 1100)
-            // }
+            if (posX <= -2000) {
+                console.log("reset")
+                this.opacity = 0
+                this.transX = 500
+                setTimeout(() => {
+                    this.opacity = 1
+                }, 1100)
+            }
             // slide left
             this.transX = this.transX - 40
 
@@ -141,6 +141,7 @@ export default {
     min-width: 350px;
     padding: 20px;
     box-sizing: border-box;
+    will-change: opacity, transform;
     transition: transform 1s linear, opacity 0.1s var(--easing-authentic-motion);
 
     .image ::v-deep .media {
