@@ -2,6 +2,8 @@
     <ul
         v-intersection-observer
         :class="classes"
+        @mouseenter="onHover"
+        @mouseleave="onHoverOff"
     >
         <li
             v-for="(item, i) in items"
@@ -13,12 +15,17 @@
                 :to="item.to"
             >
                 <roster-item :text="item.title" />
-            </nuxt-link>
 
+                <wp-image
+                    :image="item.image"
+                    class="image"
+                />
+            </nuxt-link>
+            <!-- 
             <wp-image
                 :image="item.image"
                 class="image"
-            />
+            /> -->
         </li>
     </ul>
 </template>
@@ -31,9 +38,24 @@ export default {
             default: () => []
         }
     },
+    data() {
+        return {
+            isHovered: false
+        }
+    },
     computed: {
         classes() {
-            return ["list-roster"]
+            return ["list-roster", { "is-hovered": this.isHovered }]
+        }
+    },
+    methods: {
+        onHover() {
+            console.log("hover on")
+            this.isHovered = true
+        },
+        onHoverOff() {
+            console.log("hover off")
+            this.isHovered = false
         }
     }
 }
@@ -53,37 +75,42 @@ export default {
 
     .list-item {
         padding: 0;
+        position: relative;
 
         transition: opacity 0.4s var(--easing-authentic-motion),
             color 0.4s var(--easing-authentic-motion);
     }
 
     .link {
-        z-index: 50;
+        // position: relative;
+        // z-index: 50;
         display: block;
         cursor: pointer;
 
         color: var(--color-white);
+        mix-blend-mode: difference;
         font-size: 26px;
         font-weight: 300;
         padding: 0 25px;
         text-align: right;
         transform: translate(-40%, 0);
         transition: transform 0.6s var(--easing-authentic-motion),
-            color 0.4s var(--easing-authentic-motion);
+            color 0.4s var(--easing-authentic-motion),
+            opacity 0.4s var(--easing-authentic-motion);
     }
 
     ::v-deep .image {
         position: absolute !important;
         top: 50%;
         left: 50%;
-        z-index: -1;
+        // z-index: -1;
         pointer-events: none;
         width: 655px;
 
-        opacity: 0;
-        transform: translate(-100%, -50%);
-        clip-path: inset(0% 100% 0% 0);
+        // opacity: 0;
+        transform: translate(100%, -50%);
+        clip-path: inset(0 0 0 100%);
+
         transition: opacity 0.4s var(--easing-authentic-motion),
             transform 0.4s var(--easing-authentic-motion),
             clip-path 0.6s var(--easing-authentic-motion);
@@ -95,8 +122,8 @@ export default {
             transform: translate(40%, 0);
         }
         .image {
-            transform: translate(100%, -50%);
-            clip-path: inset(0 0 0 100%);
+            transform: translate(-200%, -50%);
+            clip-path: inset(0% 100% 0% 0);
         }
     }
 
@@ -111,21 +138,27 @@ export default {
     }
 
     /* Hover State */
+    &.is-hovered {
+        .link {
+            opacity: 0;
+        }
+    }
     @media #{$has-hover} {
         ::v-deep .list-item:hover {
             .link {
-                position: relative;
-                z-index: 100;
+                // position: relative;
+                // z-index: 100;
+                opacity: 1;
             }
             .image {
-                z-index: 10;
+                // z-index: 10;
                 opacity: 1;
-                transform: translate(-75%, -50%);
+                transform: translate(60%, -50%);
                 clip-path: inset(0%);
             }
             &:nth-of-type(even) {
                 .image {
-                    transform: translate(-25%, -50%);
+                    transform: translate(-170%, -50%);
                 }
             }
         }
