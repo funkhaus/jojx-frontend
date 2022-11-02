@@ -82,13 +82,13 @@ export default {
     }
 
     .link {
-        // position: relative;
+        position: relative;
         // z-index: 50;
         display: block;
         cursor: pointer;
 
         color: var(--color-white);
-        mix-blend-mode: difference;
+        // mix-blend-mode: difference;
         font-size: 26px;
         font-weight: 300;
         padding: 0 25px;
@@ -138,20 +138,20 @@ export default {
     }
 
     /* Hover State */
-    &.is-hovered {
-        .link {
-            opacity: 0;
-        }
-    }
+    // &.is-hovered {
+    //     .link {
+    //         opacity: 0;
+    //     }
+    // }
     @media #{$has-hover} {
         ::v-deep .list-item:hover {
             .link {
                 // position: relative;
-                // z-index: 100;
+                z-index: 200;
                 opacity: 1;
             }
             .image {
-                // z-index: 10;
+                z-index: 10;
                 opacity: 1;
                 transform: translate(60%, -50%);
                 clip-path: inset(0%);
