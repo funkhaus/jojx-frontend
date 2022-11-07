@@ -1,13 +1,16 @@
 <template>
     <section :class="classes">
-        <div class="panel-top">
+        <div
+            class="panel-top"
+            @click="onClick"
+        >
             <wp-image
                 class="image intro"
                 :image="introImage"
                 mode="cover"
             />
             <gallery-home
-                :items="galleryItems"
+                :items="galleryImages"
                 :intro-is-complete="!$store.state.introIsActive"
             />
         </div>
@@ -23,7 +26,6 @@
         <div class="panel-bottom">
             <grid-work :items="gridItems" />
         </div>
-        <!-- <wp-gutenberg id="content" :blocks="parsedPage.blocks" /> -->
     </section>
 </template>
 
@@ -48,23 +50,14 @@ export default {
         introImage() {
             return this.page?.featuredImage?.node || {}
         },
-        galleryItems() {
-            // TODO: get by slug not index
-            let items = this.page?.children?.nodes?.[0].children?.nodes || []
-
-            return items.map((obj) => {
-                // Start by flatterning the "attributes"
-                return {
-                    ...obj,
-                    image: obj?.featuredImage?.node || {}
-                }
-            })
+        // TODO: ok to use gallery instread of child pages?
+        galleryImages() {
+            return this.page?.homeMeta?.imageGallery || []
         },
         gridItems() {
-            let items = this.page?.children?.nodes?.[1].children?.nodes || []
+            let items = this.page?.children?.nodes || []
 
             return items.map((obj) => {
-                // Start by flatterning the "attributes"
                 return {
                     ...obj,
                     image: obj?.featuredImage?.node || {},
@@ -111,6 +104,11 @@ export default {
             } else {
                 this.$store.commit("SET_THEME", "white")
             }
+        },
+        onClick() {
+            document.querySelector(".panel-bottom").scrollIntoView({
+                behavior: "smooth"
+            })
         }
     }
 }
@@ -125,6 +123,7 @@ export default {
     .panel-top {
         position: relative;
         background-color: var(--color-black);
+        cursor: pointer;
     }
 
     .image {

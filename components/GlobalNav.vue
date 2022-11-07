@@ -43,7 +43,7 @@ export default {
     color: var(--theme-color-nav);
     mix-blend-mode: difference;
 
-    font-size: 18px;
+    font-size: 24px;
     text-transform: capitalize;
     font-weight: 300;
     transition: all 0.4s var(--easing-authentic-motion);

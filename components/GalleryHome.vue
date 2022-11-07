@@ -9,10 +9,9 @@
         @mouseleave="resetSkew"
     >
         <gallery-item
-            v-for="(item, i) in items"
-            :key="item.id"
-            :image="item.image"
-            :to="item.to"
+            v-for="(image, i) in items"
+            :key="image.id"
+            :image="image"
             :index="i"
             :pause="pause"
             :skew="skew"
@@ -72,7 +71,6 @@ export default {
             this.pause = false
         },
         onExit() {
-            console.log("pause")
             this.pause = true
         },
         onVisibilitychange(e) {
@@ -80,7 +78,6 @@ export default {
         },
         onMouseEvent(e) {
             const clientY = e.clientY || e.touches[0].clientY
-
             this.skew = -1 * (clientY - this.$store.state.winHeight / 2)
         },
         resetSkew() {

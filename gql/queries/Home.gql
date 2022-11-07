@@ -10,38 +10,34 @@ query Home {
                     ...MediaImage
                 }
             }
-            children(first: 2) {
+            homeMeta {
+                imageGallery {
+                    ...MediaImage
+                }
+            }
+            children(first: 99) {
                 nodes {
                     ... on Page {
                         id
                         title
-
-                        children(first: 99) {
-                            nodes {
-                                ... on Page {
-                                    id
-                                    title
-                                    to: uri
-                                    text: excerpt
-                                    secondaryFeaturedImage {
-                                        secondaryFeaturedImage {
-                                            ...MediaImage
-                                        }
-                                    }
-                                    featuredImage {
-                                        node {
-                                            ...MediaImage
-                                        }
-                                    }
-                                    workMeta {
-                                        type
-                                        publication
-                                        link
-                                        talentName
-                                        workCategory
-                                    }
-                                }
+                        to: uri
+                        text: excerpt
+                        secondaryFeaturedImage {
+                            secondaryFeaturedImage {
+                                ...MediaImage
                             }
+                        }
+                        featuredImage {
+                            node {
+                                ...MediaImage
+                            }
+                        }
+                        workMeta {
+                            type
+                            publication
+                            link
+                            talentName
+                            workCategory
                         }
                     }
                 }

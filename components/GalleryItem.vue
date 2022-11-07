@@ -1,10 +1,9 @@
 <template>
     <client-only>
-        <nuxt-link
+        <div
             ref="item"
             :style="styles"
             :class="classes"
-            :to="to"
         >
             <wp-image
                 class="image"
@@ -13,7 +12,7 @@
                 object-fit="cover"
                 background-color="transparent"
             />
-        </nuxt-link>
+        </div>
     </client-only>
 </template>
 
@@ -27,10 +26,6 @@ export default {
         image: {
             type: Object,
             default: () => {}
-        },
-        to: {
-            type: String,
-            default: "false"
         },
         index: {
             type: Number,
@@ -92,7 +87,7 @@ export default {
     },
     methods: {
         start() {
-            let rate = getRandom(0.8, 1)
+            let rate = getRandom(0.75, 1)
             this.animationId = setInterval(() => {
                 this.setTransform()
             }, 1000 * rate)
@@ -103,12 +98,11 @@ export default {
         setTransform() {
             // TODO: Imrpove loop?
             // transformX
-            const posX = this.$refs.item.$el.getBoundingClientRect().x
+            const posX = this.$refs.item.getBoundingClientRect().x
 
             console.log("positionX", this.index, posX)
             // fade out
             if (posX <= -2000) {
-                console.log("reset")
                 this.opacity = 0
                 this.transX = 500
                 setTimeout(() => {
@@ -128,9 +122,9 @@ export default {
         },
         setStyles() {
             let direction = this.index % 2 == 0 ? -1 : 1
-            this.posY = getRandom(0, 150) * direction
+            this.posY = getRandom(0, 175) * direction
             this.transY = this.posY
-            this.scale = getRandom(0.75, 2)
+            this.scale = getRandom(0.6, 2)
         }
     }
 }

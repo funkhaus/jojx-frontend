@@ -140,7 +140,7 @@ export default {
                 case "directors-director-detail":
                 case "studio":
                 case "studio-studio-detail":
-                case "featured-type-detail":
+                case "featured-detail":
                     output = "black"
                     break
             }
@@ -162,7 +162,7 @@ export default {
             switch (this.$route.name) {
                 case "directors-director-detail":
                 case "studio-studio-detail":
-                case "featured-type-detail":
+                case "featured-detail":
                     show = false
                     break
             }

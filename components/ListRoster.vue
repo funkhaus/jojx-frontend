@@ -2,8 +2,6 @@
     <ul
         v-intersection-observer
         :class="classes"
-        @mouseenter="onHover"
-        @mouseleave="onHoverOff"
     >
         <li
             v-for="(item, i) in items"
@@ -21,11 +19,6 @@
                     class="image"
                 />
             </nuxt-link>
-            <!-- 
-            <wp-image
-                :image="item.image"
-                class="image"
-            /> -->
         </li>
     </ul>
 </template>
@@ -45,17 +38,7 @@ export default {
     },
     computed: {
         classes() {
-            return ["list-roster", { "is-hovered": this.isHovered }]
-        }
-    },
-    methods: {
-        onHover() {
-            console.log("hover on")
-            this.isHovered = true
-        },
-        onHoverOff() {
-            console.log("hover off")
-            this.isHovered = false
+            return ["list-roster"]
         }
     }
 }
@@ -83,7 +66,6 @@ export default {
 
     .link {
         position: relative;
-        // z-index: 50;
         display: block;
         cursor: pointer;
 
@@ -103,11 +85,10 @@ export default {
         position: absolute !important;
         top: 50%;
         left: 50%;
-        // z-index: -1;
         pointer-events: none;
         width: 655px;
 
-        // opacity: 0;
+        opacity: 0;
         transform: translate(100%, -50%);
         clip-path: inset(0 0 0 100%);
 
@@ -137,16 +118,9 @@ export default {
         }
     }
 
-    /* Hover State */
-    // &.is-hovered {
-    //     .link {
-    //         opacity: 0;
-    //     }
-    // }
     @media #{$has-hover} {
         ::v-deep .list-item:hover {
             .link {
-                // position: relative;
                 z-index: 200;
                 opacity: 1;
             }
