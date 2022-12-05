@@ -375,8 +375,10 @@ export default {
     &.type-full-width {
         width: 100%;
         .background {
-            padding: 150px 90px;
-            margin-bottom: 200px;
+            // padding: 150px 90px;
+            // margin-bottom: 200px;
+            padding: 50px 90px;
+            margin: 50px 0 150px 0;
         }
     }
 
@@ -437,9 +439,9 @@ export default {
     @media #{$gt-cinema} {
         &.type-full-width {
             width: 100%;
-            .background {
-                padding: 250px 100px;
-            }
+            // .background {
+            //     padding: 250px 100px;
+            // }
         }
         &.type-half-width {
             .background {

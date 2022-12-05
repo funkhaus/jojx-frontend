@@ -100,7 +100,7 @@ export default {
             // transformX
             const posX = this.$refs.item.getBoundingClientRect().x
 
-            console.log("positionX", this.index, posX)
+            // console.log("positionX", this.index, posX)
             // fade out
             if (posX <= -2000) {
                 this.opacity = 0
@@ -124,7 +124,7 @@ export default {
             let direction = this.index % 2 == 0 ? -1 : 1
             this.posY = getRandom(0, 175) * direction
             this.transY = this.posY
-            this.scale = getRandom(0.6, 2)
+            this.scale = getRandom(0.9, 2)
         }
     }
 }
