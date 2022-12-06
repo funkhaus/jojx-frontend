@@ -87,7 +87,8 @@ export default {
     },
     methods: {
         start() {
-            let rate = getRandom(0.75, 1)
+            // let rate = getRandom(0.75, 1)
+            let rate = getRandom(0.8, 1)
             this.animationId = setInterval(() => {
                 this.setTransform()
             }, 1000 * rate)

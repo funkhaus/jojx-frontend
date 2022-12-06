@@ -170,15 +170,16 @@ export default {
             return this.link || this.to
         },
         speed() {
-            let speed = this.index % 2 == 0 ? 0.35 : 0.25
+            // let speed = this.index % 2 == 0 ? 0.35 : 0.25
+            let speed = this.index % 2 == 0 ? 0.15 : 0.2
 
             switch (this.type) {
                 case "featured":
-                    speed = 0.2
+                    speed = 0.1
                     break
 
                 case "two-image":
-                    speed = 0.4
+                    speed = 0.25
                     break
             }
 
@@ -217,13 +218,15 @@ export default {
 
     position: relative;
     width: 50%;
-    margin: 150px auto;
+    // margin: 150px auto;
+    margin: 25px auto;
     box-sizing: border-box;
 
     .background {
         width: 100%;
         box-sizing: border-box;
-        padding: 150px 90px 50px 90px;
+        // padding: 150px 90px 50px 90px;
+        padding: 75px 90px 50px 90px;
         // background: transparent;
         // transition: background 0.8s var(--easing-authentic-motion);
     }
@@ -370,6 +373,9 @@ export default {
             max-width: 40%;
             transform: translate(0, 25%);
         }
+        .background {
+            margin-bottom: 150px;
+        }
     }
 
     &.type-full-width {
@@ -378,7 +384,7 @@ export default {
             // padding: 150px 90px;
             // margin-bottom: 200px;
             padding: 50px 90px;
-            margin: 50px 0 150px 0;
+            margin-bottom: 150px;
         }
     }
 
